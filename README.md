@@ -42,8 +42,8 @@ Classes name are the same just without spaces
 | Darren | Find Help Layout, bulletin layout, Bulletin create button |
 |Melody | Account Creation, matching backend, bulletin backend, login |
 |Kai Xun | Find help cards, Bulletin cards, Bulletin popup card |
-|Le Xuan | Send help interface, Bulletin create button|
-|Jun Kai | Search Functionality, Navbar, Selector/Filter (bulletin)|
+|Le Xuan | Send help interface, Bulletin create button, Navbar|
+|Jun Kai | Search Functionality, Selector/Filter (bulletin)|
 
 
 | Main Component | Sub Component |
