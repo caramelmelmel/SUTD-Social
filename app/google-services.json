@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1049843395866",
+    "firebase_url": "https://sutdlogintest.firebaseio.com",
+    "project_id": "sutdlogintest",
+    "storage_bucket": "sutdlogintest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049843395866:android:5ee008a05e3b6c66ce50a3",
+        "android_client_info": {
+          "package_name": "com.caramelmel.logintest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049843395866-bc6a1stv0l5198nig0g9tbhmkp0kq61d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH9e82M88E7kZrHT3kg1wQABsZ9RhLoTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049843395866-bc6a1stv0l5198nig0g9tbhmkp0kq61d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
