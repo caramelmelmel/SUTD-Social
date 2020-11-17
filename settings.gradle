@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "SUTD-Social"
+rootProject.name = "BottomNavBar"

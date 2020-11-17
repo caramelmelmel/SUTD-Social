@@ -1,4 +1,4 @@
-package com.example.sutd_social;
+package com.example.bottomnavbar;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.sutd_social", appContext.getPackageName());
+        assertEquals("com.example.bottomnavbar", appContext.getPackageName());
     }
 }
