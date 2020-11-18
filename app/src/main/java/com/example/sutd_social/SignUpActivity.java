@@ -33,7 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
-        firebaseAuth = firebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
         emailET = findViewById(R.id.email);
         password = findViewById(R.id.password);
         cfm_pw = findViewById(R.id.confirm);
@@ -113,5 +113,4 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     }
-
 }
