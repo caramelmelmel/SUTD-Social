@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:hint="Password"
-            android:inputType="textWebPassword"
+            android:inputType="textPassword"
             android:paddingVertical="15dp"
             android:paddingLeft="85dp"
             android:textColor="#000000"
@@ -94,22 +94,16 @@
 
     </RelativeLayout>
 
-    <com.google.android.material.button.MaterialButton
-        style="@style/Widget.AppCompat.Button.Borderless"
+
+    <Button
         android:id="@+id/signup"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp"
-        android:background="#00203FFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Sign Up"
-        android:textColor="#ffffff"
-        android:textSize="25dp"
+        android:background="@drawable/button_border"
         android:textAllCaps="false"
-        app:backgroundTint="@android:color/transparent"
-        app:cornerRadius="8dp"
-        app:rippleColor="#33AAAAAA"
-        app:strokeColor="#ffffff"
-        app:strokeWidth="2dp"
+        android:textSize="24dp"
+
         />
     <LinearLayout
         android:layout_width="wrap_content"
@@ -117,16 +111,16 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Have an account?"
+            android:textColor="#ffffff"
+            android:textSize="18dp"/>
+        <TextView
+            android:id="@+id/signInTv"
 
-    android:layout_marginBottom="40dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Have an account?"
-        android:textColor="#ffffff"
-        android:textSize="18dp"/>
-    <TextView
-        android:id="@+id/signInTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign In"
@@ -135,9 +129,6 @@
         android:textSize="20dp"
         android:textColor="#ffffff"/>
 
-</LinearLayout>
-
-
-
-
     </LinearLayout>
+
+</LinearLayout>

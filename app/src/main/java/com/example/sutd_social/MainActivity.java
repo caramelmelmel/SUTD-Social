@@ -1,59 +1,115 @@
 package com.example.sutd_social;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.sutd_social.firebase.Social;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.HashMap;
-
-import static android.os.SystemClock.sleep;
-
-//using FB auth
-
 public class MainActivity extends AppCompatActivity {
-    public static final String TAG = "MainActivity";
-    private FirebaseAuth mAuth;
+    private static final String TAG = "MainActivity";
+    private EditText emailET;
+    private EditText password;
+    private EditText cfm_pw;
+    private Button signInButton;
+    private TextView signUpTv;
+    private ProgressDialog progressDialog;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        firebaseAuth=FirebaseAuth.getInstance();
+        emailET=findViewById(R.id.email);
+        password=findViewById(R.id.password);
+        signInButton=findViewById(R.id.login);
+        progressDialog = new ProgressDialog(this);
+        signUpTv = findViewById(R.id.signupTv);
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
+            // user is logged in
+            Log.d(TAG, "User is already logged in");
+            Intent intent = new Intent(MainActivity.this,DashBoardActivity.class);
+            startActivity(intent);
+            Social.getInstance();
+            finish();
+        } else {
+            // user is not logged in
+            // TODO: do nothing I guess?
+        }
 
-        // Show login page to get email, password - can implement data persistence
-        // Do consider this method to create account - mAuth.createUserWithEmailAndPassword()
-
-        // Hard coding login
-        String email = "testAccount@gmail.com";
-        String pass = "testing123";
-        mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+        signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmailAndPassword:success");
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    // change to home page
-                    setContentView(R.layout.activity_main);
-                    Social.getInstance();
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmailAndPassword:failure", task.getException());
-                    // Do a toast or something
-                }
+            public void onClick(View view) {
+                Login();
             }
+
         });
+
+        signUpTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,SignUpActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+        });
+
     }
-}
+    private void Login(){
+//        String email = emailET.getText().toString();
+//        String password1 = password.getText().toString();
+//        Hard code test cases
+        String email = "testaccount@gmail.com";
+        String password1 = "testing123";
+        if(TextUtils.isEmpty(email)){
+            //refers to the edittext
+            emailET.setError("Enter your email");
+        }
+        else if(TextUtils.isEmpty(password1)){
+            password.setError("Enter your password");
+        }
+
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+        progressDialog.setCanceledOnTouchOutside(false);
+
+        Log.d(TAG, "Login current user");
+        firebaseAuth.signInWithEmailAndPassword(email, password1).addOnCompleteListener(this,new OnCompleteListener(){
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(MainActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(MainActivity.this,DashBoardActivity.class);
+                    startActivity(intent);
+                    Social.getInstance();
+                    finish();
+
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Sign In failed!", Toast.LENGTH_LONG).show();
+                }
+                progressDialog.dismiss();
+            }
+        });}
+
+    }
+
 

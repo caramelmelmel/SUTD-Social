@@ -1,4 +1,4 @@
-package com.example.sutd_social;
+package com.example.sutd_social.firebase;
 
 import android.util.Log;
 
@@ -34,16 +34,16 @@ public class BillBoard {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     //Getting User object from dataSnapshot
-                    User user = data.getValue(User.class);
-                    String username = user.getUserName();
-                    String firstName = user.getFirstName();
-                    String lastName = user.getLastName();
-                    Date dob = user.getDob();
-                    String day = dob.getDay();
-                    String month = dob.getMonth();
-                    String year = dob.getYear();
+//                    User user = data.getValue(User.class);
+//                    String username = user.getUserName();
+//                    String firstName = user.getFirstName();
+//                    String lastName = user.getLastName();
+//                    Date dob = user.getDob();
+//                    String day = dob.getDay();
+//                    String month = dob.getMonth();
+//                    String year = dob.getYear();
 
-                    Log.i(TAG, "onDataChange: " + username);
+//                    Log.i(TAG, "onDataChange: " + username);
                 }
 
 

@@ -35,10 +35,10 @@
             android:background="#FFFFFF"/>
 
         <ImageView
-            android:layout_width="65dp"
+            android:layout_width="70dp"
             android:layout_height="55dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="-1dp"
+            android:layout_marginLeft="-2dp"
             android:background="@drawable/email" />
 
     </RelativeLayout>
@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:hint="Password"
-            android:inputType="textWebPassword"
+            android:inputType="textPassword"
             android:paddingVertical="15dp"
             android:paddingLeft="85dp"
             android:textColor="#000000"
@@ -70,22 +70,15 @@
 
     </RelativeLayout>
 
-    <com.google.android.material.button.MaterialButton
-        style="@style/Widget.AppCompat.Button.Borderless"
+    <Button
         android:id="@+id/login"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp"
-        android:background="#00203FFF"
-        android:text="Sign In"
-        android:textColor="#ffffff"
-        android:textSize="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:background="@drawable/button_border"
         android:textAllCaps="false"
-        app:backgroundTint="@android:color/transparent"
-        app:cornerRadius="8dp"
-        app:rippleColor="#33AAAAAA"
-        app:strokeColor="#ffffff"
-        app:strokeWidth="2dp"
+        android:textSize="24dp"
+
         />
 
     <LinearLayout
@@ -102,6 +95,7 @@
             android:textColor="#ffffff"
             android:textSize="18dp"/>
         <TextView
+            android:id="@+id/signupTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign Up"
@@ -109,6 +103,8 @@
             android:textStyle="bold"
             android:textSize="20dp"
             android:textColor="#ffffff"/>
+
+
 
     </LinearLayout>
 
