@@ -22,8 +22,8 @@
                     android:id="@+id/card_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#4AFF9B"
                     android:padding="20px"
-                    android:background="#FF0000"
                     android:text="Hello"
                     android:textSize="20sp" />
 
@@ -57,7 +57,9 @@
                     android:layout_marginRight="25px"
                     android:layout_marginTop="10px"
                     android:layout_marginBottom="10px"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel pretium mi. Ut ut lectus commodo, consectetur arcu vitae, ornare nibh."
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:text="Lorem ipsum dolor amet, consectetur adipiscing elit. Donec vel pretium mi. Ut ut lectus commodo, consectetur arcu vitae, ornare nibh.Lorem ipsum dolor amet, consectetur adipiscing elit. Donec vel pretium mi. Ut ut lectus commodo, consectetur arcu vitae, ornare nibh."
                     android:textSize="14sp" />
 
             </RelativeLayout>

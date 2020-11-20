@@ -29,11 +29,14 @@ public class Bulletin_inner_post_popup extends Activity {
 
         getWindow().setLayout((int)(width *0.83), (int)(height*0.85));
 
+        getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.clear));
+
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
         params.x = 0;
         params.y = -20;
-
+        params.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        params.dimAmount = 0.3f;
         getWindow().setAttributes(params);
     }
 }

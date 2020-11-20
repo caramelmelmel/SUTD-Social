@@ -56,6 +56,7 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
                 Activity origin = (Activity) context;
 
                 origin.startActivityForResult(new Intent(context,Bulletin_inner_post_popup.class),activity_code_inner);
+
             }
         });
 
