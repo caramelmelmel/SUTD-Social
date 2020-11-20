@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BottomNavBar">
-        <activity android:name=".BulletinPopUp"
+        <activity android:name=".Bulletin_inner_post_popup"
             android:theme="@style/Theme.BottomNavBar.PopMe"></activity>
+        <activity
+            android:name=".BulletinPopUp"
+            android:theme="@style/Theme.BottomNavBar.PopMe" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

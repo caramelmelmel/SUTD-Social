@@ -1,6 +1,8 @@
 package com.example.bottomnavbar;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
     private ArrayList<BulletinBoardPost> posts = new ArrayList<>(); // create new ArrayList to fit into Recycler View
 
     private Context context;  // context have to be created in order for items to reference it
+    private int activity_code_inner = 2;
 
     public BulletinBoardPostRecViewAdapter(Context context) {  // create constructor for Adapter Class
         this.context = context;   // constructor for context
@@ -45,6 +48,16 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
 //        });
         holder.postTitle.setText(posts.get(position).getPostTitle());
         holder.postDescription.setText(posts.get(position).getPostDescription());
+
+        holder.BulletinBoardParent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Activity origin = (Activity) context;
+
+                origin.startActivityForResult(new Intent(context,Bulletin_inner_post_popup.class),activity_code_inner);
+            }
+        });
 
 
     }
