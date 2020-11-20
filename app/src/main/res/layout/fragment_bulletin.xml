@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BulletinFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_marginBottom="15dp"
+        android:padding="3dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_add_post"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,6 +20,66 @@
             android:id="@+id/bulletin_board_post_RecView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="fill_parent"
+            android:layout_margin="10px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:cardCornerRadius="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <TextView
+                    android:id="@+id/card_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20px"
+                    android:background="#FF0000"
+                    android:text="Hello"
+                    android:textSize="20sp" />
+
+                <ImageButton
+                    android:id="@+id/card_dotbutton"
+                    style="?android:borderlessButtonStyle"
+                    android:layout_width="120px"
+                    android:layout_height="120px"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_action_bulletin" />
+
+                <ImageView
+                    android:id="@+id/card_image"
+                    android:layout_below="@+id/card_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:layout_centerHorizontal="true"
+                    android:maxHeight="300px"
+                    android:src="@drawable/ic_action_account" />
+
+                <TextView
+                    android:id="@+id/card_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/card_image"
+                    android:layout_marginLeft="25px"
+                    android:layout_marginRight="25px"
+                    android:layout_marginTop="10px"
+                    android:layout_marginBottom="10px"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel pretium mi. Ut ut lectus commodo, consectetur arcu vitae, ornare nibh."
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
 
 
     </RelativeLayout>
@@ -41,11 +102,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="15dp"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!--RelativeLayout
         android:id="@+id/relativeLayout"
