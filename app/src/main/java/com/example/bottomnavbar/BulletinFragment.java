@@ -90,7 +90,7 @@ public class BulletinFragment extends Fragment {
         adapter.setPosts(bulletinBoardPosts);
         bulletinBoardRecView.setAdapter(adapter);
 
-        bulletinBoardRecView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        bulletinBoardRecView.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
         addPost = view.findViewById(R.id.btn_add_post);
 
@@ -139,4 +139,5 @@ public class BulletinFragment extends Fragment {
             }
         }
     }
+
 }
