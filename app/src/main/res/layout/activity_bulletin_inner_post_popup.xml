@@ -29,7 +29,7 @@
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/card_dotbutton"
+                android:id="@+id/card_back"
                 style="?android:borderlessButtonStyle"
                 android:layout_width="300px"
                 android:layout_height="140px"
