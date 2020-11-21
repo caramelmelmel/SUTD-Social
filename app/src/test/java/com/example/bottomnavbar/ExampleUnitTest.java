@@ -1,4 +1,4 @@
-package com.example.sutd_social;
+package com.example.bottomnavbar;
 
 import org.junit.Test;
 
