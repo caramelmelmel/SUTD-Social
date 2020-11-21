@@ -2,11 +2,18 @@ package com.example.bottomnavbar;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,11 +61,38 @@ public class MatchFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    //--initialize for find help page
+    private RecyclerView find_help_RecView;
+    private EditText searchBar;
+    private ArrayList<Find_Help> find_help_posts;
+    //--
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_match, container, false);
+        View view = inflater.inflate(R.layout.fragment_match, container, false);
+
+        find_help_RecView = view.findViewById(R.id.find_help_RecView);
+        searchBar =  view.findViewById(R.id.find_help_searchbar);
+
+        find_help_posts= new ArrayList<>();
+
+        //find_help_posts.add(new Find_Help("Darren", "ISTD"));
+
+        FindHelpRecViewAdapter adapter = new FindHelpRecViewAdapter(getContext());
+        adapter.setPosts(find_help_posts);
+        find_help_RecView.setAdapter(adapter);
+        find_help_RecView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
     }
 }
