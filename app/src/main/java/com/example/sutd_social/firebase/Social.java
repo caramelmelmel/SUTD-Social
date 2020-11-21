@@ -59,6 +59,7 @@
 package com.example.sutd_social.firebase;
 
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 
@@ -250,3 +251,22 @@ public class Social {
         return users;
     }
 }
+/*
+
+Testing code:
+
+    public void testing(View v) {
+        HashMap<String, Long> skills = new HashMap<>();
+        skills.put("python", (long) 100);
+        skills.put("dance", (long) 50);
+        String id = Social.addUser("tommy", "Hi there", "ISTD", "Badminton", "@txtme", skills);
+
+        User user = Social.getUser(id);
+
+        Log.d(TAG, user.name + user.info + user.pillar + user.fifthRow + user.telegram);
+        Log.d(TAG, user.skills.toString());
+
+        Social.rmUser(id);
+    }
+
+*/
