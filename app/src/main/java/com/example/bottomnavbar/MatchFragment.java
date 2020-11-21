@@ -78,7 +78,7 @@ public class MatchFragment extends Fragment {
 
         find_help_posts= new ArrayList<>();
 
-        //find_help_posts.add(new Find_Help("Darren", "ISTD"));
+        find_help_posts.add(new Find_Help("Darren", "ISTD"));
 
         FindHelpRecViewAdapter adapter = new FindHelpRecViewAdapter(getContext());
         adapter.setPosts(find_help_posts);

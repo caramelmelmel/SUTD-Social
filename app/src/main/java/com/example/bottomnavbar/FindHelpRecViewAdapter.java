@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -43,6 +45,8 @@ public class FindHelpRecViewAdapter extends RecyclerView.Adapter<FindHelpRecView
 //                //Toast.makeText(context, contacts.get(position).getName() + " Selected",Toast.LENGTH_SHORT).show();
 //            }
 //        });
+        holder.StudentName.setText(find_help_posts.get(position).getName());
+        holder.StudentPillar.setText(find_help_posts.get(position).getPillar());
 
     }
 
@@ -58,12 +62,16 @@ public class FindHelpRecViewAdapter extends RecyclerView.Adapter<FindHelpRecView
 
     public class ViewHolder extends RecyclerView.ViewHolder{   // inner view holder class will hold view for every item in recycler view
 
-        private TextView temp_txtview;  // initiallize all widgets that were inside the new layout file
+        private CardView cardView;  // initiallize all widgets that were inside the new layout file
+        private TextView StudentName, StudentPillar, MatchRate, Skills;
+        private ImageView ProfilePicture;
         //private RelativeLayout parent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            temp_txtview = itemView.findViewById(R.id.temp_textView);  // Have to initialize findViewByID through the view object in this class
-
+            cardView = itemView.findViewById(R.id.card_view);  // Have to initialize findViewByID through the view object in this class
+            ProfilePicture = itemView.findViewById(R.id.cardProfilePicture);
+            StudentName = itemView.findViewById(R.id.cardStudentName);
+            StudentPillar = itemView.findViewById(R.id.cardStudentPillar);
             //parent = itemView.findViewById(R.id.parent);  // Have to instantiate to access from OnBindViewHolder Method
         }
     }

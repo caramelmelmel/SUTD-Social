@@ -1,12 +1,16 @@
 package com.example.bottomnavbar;
 
+import java.util.HashMap;
+
 public class Find_Help {
     private String name;
     private String pillar;
+    private String profilePicture;
 
     public Find_Help(String name, String pillar) {
         this.name = name;
         this.pillar = pillar;
+        this.profilePicture = profilePicture;
     }
 
     public String getName() {
