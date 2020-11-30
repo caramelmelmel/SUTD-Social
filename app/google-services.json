@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1049843395866:android:5ee008a05e3b6c66ce50a3",
         "android_client_info": {
-          "package_name": "com.caramelmel.logintest"
+          "package_name": "com.example.bottomnavbar"
         }
       },
       "oauth_client": [
