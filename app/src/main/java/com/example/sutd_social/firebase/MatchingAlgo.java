@@ -44,7 +44,7 @@ public class MatchingAlgo {
     // -> represents the mapping
     // skill -> id -> level
     //note that this is ONLY for the individual skill
-    MatchingAlgo() {
+    public MatchingAlgo() {
         skillset = getSkillset();
     }
 
@@ -182,6 +182,7 @@ public class MatchingAlgo {
     }
 
     //retrieve from above
+    //return the array list in the format of the id to the percent of
     public ArrayList<Map.Entry<String, Double>> getTheStats(String id, String skill) {
         sk_conf = retrieve();
         confidence = getConf_arr(sk_conf, skill);

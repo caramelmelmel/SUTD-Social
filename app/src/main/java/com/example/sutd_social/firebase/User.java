@@ -11,7 +11,7 @@ public class User {
     public String displayPic;
     public HashMap<String, Long> skills;
 
-    User(String name, String info, String pillar, String fifthRow, String telegram, String displayPic, HashMap<String, Long> skills) {
+    public User(String name, String info, String pillar, String fifthRow, String telegram, String displayPic, HashMap<String, Long> skills) {
         this.name = name;
         this.info = info;
         this.pillar = pillar;
@@ -20,4 +20,8 @@ public class User {
         this.displayPic = displayPic;
         this.skills = skills;
     }
+
+
+
+
 }

@@ -80,7 +80,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
-import com.example.landing_page.R;
+//import com.example.landing_page.R;
+import com.example.sutd_social.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -111,7 +112,7 @@ public class Social {
         return ourInstance;
     }
 
-    private Social() {
+    public Social() {
         // Query from Firebase and get the required information
         Log.d(TAG, "Initialising Social");
 
@@ -181,6 +182,7 @@ public class Social {
 
     }
 
+    //uploads the person image
     public static void addImage(final String id, byte[] image) {
         // https://firebase.google.com/docs/storage/android/upload-files
         // Point to the person's image in jpg format
