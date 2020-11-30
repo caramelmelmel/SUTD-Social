@@ -32,36 +32,27 @@ public class Population extends Social{
     }
 
     //returns the new confidence for the user id to be pushed to firebase
-    public Double updatedUserclass(ArrayList<Map.Entry<String, Double>> sendHelpInstance, String skill) {
+    public String updatedUserclass(ArrayList<Map.Entry<String, Double>> sendHelpInstance, String skill) {
         //access the list through a for loop
         double confinSkill = 0;
         //retrieve stuff for user
         sendHelpInstance = getSortedMatchAlgo(id, skill);
         for (int i = 0; i < sendHelpInstance.size(); i++) {
-            if(sendHelpInstance.get(i).getKey()== id){
+            if(sendHelpInstance.get(i).getKey().equals(id)){
                 confinSkill = sendHelpInstance.get(i).getValue();
                 break;
         }
 
     }
-        return confinSkill;
+        return String.valueOf(confinSkill);
+
     }
+
+    //now, we need the new constructor method for the official population of the page
+
 
     //converts the above to string for storage into firebase
-    @Override
-    public static User getUser(String id,s){
-        String name = getName(id);
-        String info = getInfo(id);
-        String pillar = getPillar(id);
-        String fifthRow = getFifthRow(id);
-        String telegram = getTelegram(id);
-        String displayPic = getDisplayPic(id);
-        HashMap<String, Long> skills = getSkills(id);
-        Double confinSkill = updatedUserclass(ArrayList<Map.Entry<String,Double>> sendHelpInstance, String skills.get(id));
 
-        User user = new User(name, info, pillar, fifthRow, telegram, displayPic, skills);
-        return user;
-    }
 
 
    /* public HashMap<String,String> getName(){
