@@ -14,9 +14,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sutd_social.firebase.Social;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -95,11 +98,12 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful()){
+                    String id = firebaseAuth.getCurrentUser().getUid();
+                    Social.addUser(id,"", "", "", "", "", new HashMap<String, Long>());
                     Toast.makeText(SignUpActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(SignUpActivity.this,MainActivity.class);
                     startActivity(intent);
                     finish();
-
                 }
                 else {
                     Toast.makeText(SignUpActivity.this, "Sign Up failed!", Toast.LENGTH_LONG).show();

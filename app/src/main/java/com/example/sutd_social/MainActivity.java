@@ -3,6 +3,7 @@ package com.example.sutd_social;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sutd_social.firebase.Admin;
+import com.example.sutd_social.firebase.BulletinBoard;
 import com.example.sutd_social.firebase.Social;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "User is already logged in");
             Intent intent = new Intent(MainActivity.this,DashBoardActivity.class);
             startActivity(intent);
+            Admin.init(firebaseAuth.getCurrentUser().getUid());
             Social.getInstance();
+            BulletinBoard.getInstance();
             finish();
         } else {
             // user is not logged in
@@ -74,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void Login(){
-//        String email = emailET.getText().toString();
-//        String password1 = password.getText().toString();
-//        Hard code test cases
-        String email = "testaccount@gmail.com";
-        String password1 = "testing123";
+        String email = emailET.getText().toString();
+        String password1 = password.getText().toString();
+        // Hard code test cases
+        // String email = "testaccount@gmail.com";
+        // String password1 = "testing123";
         if(TextUtils.isEmpty(email)){
             //refers to the edittext
             emailET.setError("Enter your email");
