@@ -10,11 +10,15 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.sutd_social.firebase.Bulletin;
+import com.example.sutd_social.firebase.BulletinBoard;
+
 public class BulletinPopUp extends Activity {
 
     private Button btn_Confirm,btn_Cancel;
     private EditText edtTxtTitle;
     private EditText edtTxtDescription;
+    private EditText edtTxtStudentID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,7 @@ public class BulletinPopUp extends Activity {
 
         edtTxtTitle = findViewById(R.id.edtTxt_Title);
         edtTxtDescription = findViewById(R.id.edtTxt_description);
+        edtTxtStudentID = findViewById(R.id.edtTxt_student_id);
 
         btn_Confirm = findViewById(R.id.btn_Confirm);
 
@@ -32,6 +37,9 @@ public class BulletinPopUp extends Activity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 String txtTitle = edtTxtTitle.getText().toString();
                 String txtDescription = edtTxtDescription.getText().toString();
+                String txt_StudentID = edtTxtStudentID.getText().toString();
+                // adding to firebase
+                BulletinBoard.addBulletin(txt_StudentID, new Bulletin(txtTitle,txtDescription));
                 intent.putExtra("txtTitle", txtTitle);
                 intent.putExtra("txtDescription", txtDescription);
                 setResult(Activity.RESULT_OK, intent);

@@ -32,6 +32,11 @@ public class Bulletin {
         // retrieve the Class should be the only other function
         // together with storing all in an HashMap of <id>, <bulletin>
     }
+// Added new constructor for 2 way population
+    public Bulletin(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
 
     public static String dateFormat(Date date) {
         return dateFormat.format(date);
