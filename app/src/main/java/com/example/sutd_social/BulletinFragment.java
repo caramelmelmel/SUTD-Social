@@ -1,4 +1,4 @@
-package com.example.bottomnavbar;
+package com.example.sutd_social;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -64,7 +64,7 @@ public class BulletinFragment extends Fragment {
     private ArrayList<BulletinBoardPost> bulletinBoardPosts;
     private BulletinBoardPostRecViewAdapter adapter;
     // for popup
-    private int activity_code = 1;
+    private final int activity_code = 1;
     //-----------
     //---------------------------
 

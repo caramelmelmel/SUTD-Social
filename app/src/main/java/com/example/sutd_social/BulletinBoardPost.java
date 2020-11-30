@@ -1,4 +1,4 @@
-package com.example.bottomnavbar;
+package com.example.sutd_social;
 
 public class BulletinBoardPost {
     private String postTitle, postDescription;

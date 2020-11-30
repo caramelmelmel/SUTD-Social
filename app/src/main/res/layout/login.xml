@@ -5,7 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_bkg"
+    android:paddingHorizontal="30dp"
+    tools:context=".LoginActivity">
 
     <FrameLayout
         android:id="@+id/frameLayout"
