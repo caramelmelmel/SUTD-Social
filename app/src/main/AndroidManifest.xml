@@ -16,7 +16,7 @@
         <activity
             android:name="com.example.sutd_social.BulletinPopUp"
             android:theme="@style/Theme.BottomNavBar.PopMe" />
-        <activity android:name="com.example.sutd_social.MainActivity">
+        <activity android:name="com.example.sutd_social.MainActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
