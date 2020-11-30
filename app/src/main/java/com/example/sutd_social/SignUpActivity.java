@@ -54,7 +54,7 @@ public class SignUpActivity extends AppCompatActivity {
         signInTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignUpActivity.this,MainActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -101,7 +101,7 @@ public class SignUpActivity extends AppCompatActivity {
                     String id = firebaseAuth.getCurrentUser().getUid();
                     Social.addUser(id,"", "", "", "", "", new HashMap<String, Long>());
                     Toast.makeText(SignUpActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(SignUpActivity.this,MainActivity.class);
+                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }

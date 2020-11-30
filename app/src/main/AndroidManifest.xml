@@ -17,6 +17,7 @@
             android:name=".BulletinPopUp"
             android:theme="@style/Theme.BottomNavBar.PopMe" />
         <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

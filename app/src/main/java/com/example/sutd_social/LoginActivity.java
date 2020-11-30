@@ -3,7 +3,6 @@ package com.example.sutd_social;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private EditText emailET;
     private EditText password;
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login);
         firebaseAuth=FirebaseAuth.getInstance();
         emailET=findViewById(R.id.email);
         password=findViewById(R.id.password);
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         if (user != null) {
             // user is logged in
             Log.d(TAG, "User is already logged in");
-            Intent intent = new Intent(MainActivity.this,DashBoardActivity.class);
+            Intent intent = new Intent(LoginActivity.this,DashBoardActivity.class);
             startActivity(intent);
             Admin.init(firebaseAuth.getCurrentUser().getUid());
             Social.getInstance();
@@ -70,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         signUpTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,SignUpActivity.class);
+                Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -101,15 +100,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(MainActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(MainActivity.this,DashBoardActivity.class);
+                    Toast.makeText(LoginActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(LoginActivity.this,DashBoardActivity.class);
                     startActivity(intent);
                     Social.getInstance();
                     finish();
 
                 }
                 else {
-                    Toast.makeText(MainActivity.this, "Sign In failed!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Sign In failed!", Toast.LENGTH_LONG).show();
                 }
                 progressDialog.dismiss();
             }

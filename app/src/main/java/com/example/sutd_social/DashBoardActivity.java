@@ -22,7 +22,7 @@ public class DashBoardActivity extends Activity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(DashBoardActivity.this, MainActivity.class);
+                Intent intent = new Intent(DashBoardActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
