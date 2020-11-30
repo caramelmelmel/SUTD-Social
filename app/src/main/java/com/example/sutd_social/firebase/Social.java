@@ -80,10 +80,9 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
-import com.example.sutd_social.R;
+import com.example.landing_page.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -104,7 +103,7 @@ public class Social {
     private static final String TAG = "SocialSingleton";
     private static final HashSet<String> strHeader = new HashSet<>(Arrays.asList("Name", "Info", "Pillar", "FifthRow", "Telegram", "DisplayPic"));
     private static final HashSet<String> nestedHeader = new HashSet<>(Arrays.asList("Skills"));
-    private static HashMap<String, HashMap> users = new HashMap<>();
+    private static final HashMap<String, HashMap> users = new HashMap<>();
     private static DatabaseReference socialRef; // Firebase
     private static StorageReference socialImgRef; // Storage
 

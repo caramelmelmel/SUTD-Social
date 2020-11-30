@@ -1,6 +1,4 @@
-package com.example.bottomnavbar;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.sutd_social;
 
 import android.app.Activity;
 import android.content.Intent;

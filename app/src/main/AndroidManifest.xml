@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.bottomnavbar">
+    package="com.example.sutd_social">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -11,12 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BottomNavBar">
-        <activity android:name=".Bulletin_inner_post_popup"
+        <activity android:name="com.example.sutd_social.Bulletin_inner_post_popup"
             android:theme="@style/Theme.BottomNavBar.PopMe"></activity>
         <activity
-            android:name=".BulletinPopUp"
+            android:name="com.example.sutd_social.BulletinPopUp"
             android:theme="@style/Theme.BottomNavBar.PopMe" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.sutd_social.MainActivity">
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

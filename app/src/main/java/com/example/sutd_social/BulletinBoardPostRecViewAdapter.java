@@ -1,4 +1,4 @@
-package com.example.bottomnavbar;
+package com.example.sutd_social;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,12 +6,10 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -20,8 +18,8 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
 
     private ArrayList<BulletinBoardPost> posts = new ArrayList<>(); // create new ArrayList to fit into Recycler View
 
-    private Context context;  // context have to be created in order for items to reference it
-    private int activity_code_inner = 2;
+    private final Context context;  // context have to be created in order for items to reference it
+    private final int activity_code_inner = 2;
 
     public BulletinBoardPostRecViewAdapter(Context context) {  // create constructor for Adapter Class
         this.context = context;   // constructor for context
@@ -75,8 +73,9 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
 
     public class ViewHolder extends RecyclerView.ViewHolder{   // inner view holder class will hold view for every item in recycler view
 
-        private TextView postTitle, postDescription;  // initiallize all widgets that were inside the new layout file
-        private CardView BulletinBoardParent;
+        private final TextView postTitle;
+        private final TextView postDescription;  // initiallize all widgets that were inside the new layout file
+        private final CardView BulletinBoardParent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             postTitle = itemView.findViewById(R.id.card_title);  // Have to initialize findViewByID through the view object in this class

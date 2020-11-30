@@ -1,6 +1,4 @@
-package com.example.bottomnavbar;
-
-import java.util.HashMap;
+package com.example.sutd_social;
 
 public class Find_Help {
     private String name;

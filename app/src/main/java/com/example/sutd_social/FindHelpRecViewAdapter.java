@@ -1,13 +1,10 @@
-package com.example.bottomnavbar;
+package com.example.sutd_social;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,7 +17,7 @@ public class FindHelpRecViewAdapter extends RecyclerView.Adapter<FindHelpRecView
 
     private ArrayList<Find_Help> find_help_posts = new ArrayList<>(); // create new ArrayList to fit into Recycler View
 
-    private Context context;  // context have to be created in order for items to reference it
+    private final Context context;  // context have to be created in order for items to reference it
 
     public FindHelpRecViewAdapter(Context context) {  // create constructor for Adapter Class
         this.context = context;   // constructor for context
@@ -62,9 +59,12 @@ public class FindHelpRecViewAdapter extends RecyclerView.Adapter<FindHelpRecView
 
     public class ViewHolder extends RecyclerView.ViewHolder{   // inner view holder class will hold view for every item in recycler view
 
-        private CardView cardView;  // initiallize all widgets that were inside the new layout file
-        private TextView StudentName, StudentPillar, MatchRate, Skills;
-        private ImageView ProfilePicture;
+        private final CardView cardView;  // initiallize all widgets that were inside the new layout file
+        private final TextView StudentName;
+        private final TextView StudentPillar;
+        private TextView MatchRate;
+        private TextView Skills;
+        private final ImageView ProfilePicture;
         //private RelativeLayout parent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
