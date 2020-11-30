@@ -78,6 +78,7 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
         private final CardView BulletinBoardParent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            //card_title, card_content
             postTitle = itemView.findViewById(R.id.card_title);  // Have to initialize findViewByID through the view object in this class
             postDescription = itemView.findViewById(R.id.card_content);
             BulletinBoardParent = itemView.findViewById(R.id.bulletin_board_post_layout);  // Have to instantiate to access from OnBindViewHolder Method

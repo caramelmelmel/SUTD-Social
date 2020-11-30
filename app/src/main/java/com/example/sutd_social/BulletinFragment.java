@@ -15,9 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.sutd_social.firebase.Bulletin;
+import com.example.sutd_social.firebase.BulletinBoard;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,6 +90,27 @@ public class BulletinFragment extends Fragment {
         bulletinBoardPosts = new ArrayList<>();
 
         adapter = new BulletinBoardPostRecViewAdapter(getContext());
+        //firebase--------
+        ArrayList<String> keySet = new ArrayList<>();
+        HashMap<String, Bulletin> all_posts = BulletinBoard.getBulletin();
+        for (String key : all_posts.keySet()){
+            keySet.add(key);
+        }
+
+
+        for (String key : keySet ){
+            String individual_post_title = BulletinBoard.getBulletin(key).title;
+            String individual_post_description = BulletinBoard.getBulletin(key).description;
+            bulletinBoardPosts.add(new BulletinBoardPost(individual_post_title,individual_post_description));
+        }
+
+
+
+
+        //--------
+
+
+
         adapter.setPosts(bulletinBoardPosts);
         bulletinBoardRecView.setAdapter(adapter);
 

@@ -3,6 +3,7 @@ package com.example.sutd_social;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null) {
             // user is logged in
             Log.d(TAG, "User is already logged in");
-            Intent intent = new Intent(LoginActivity.this,DashBoardActivity.class);
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
             Admin.init(firebaseAuth.getCurrentUser().getUid());
             Social.getInstance();
@@ -57,7 +58,9 @@ public class LoginActivity extends AppCompatActivity {
             // user is not logged in
             // TODO: do nothing I guess?
         }
-
+        // can delete this after
+        //startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        //-----------------------
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,9 +83,9 @@ public class LoginActivity extends AppCompatActivity {
     private void Login(){
         String email = emailET.getText().toString();
         String password1 = password.getText().toString();
-        // Hard code test cases
-        // String email = "testaccount@gmail.com";
-        // String password1 = "testing123";
+//         Hard code test cases
+//         String email = "testaccount@gmail.com";
+//         String password1 = "testing123";
         if(TextUtils.isEmpty(email)){
             //refers to the edittext
             emailET.setError("Enter your email");
@@ -103,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful()){
                     Toast.makeText(LoginActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginActivity.this,DashBoardActivity.class);
+                    Intent intent = new Intent(LoginActivity.this,MainActivity.class); //DashBoardActivity
                     startActivity(intent);
                     Admin.init(firebaseAuth.getCurrentUser().getUid());
                     Social.getInstance();
