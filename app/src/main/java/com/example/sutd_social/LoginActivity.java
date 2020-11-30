@@ -86,9 +86,11 @@ public class LoginActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(email)){
             //refers to the edittext
             emailET.setError("Enter your email");
+            return;
         }
         else if(TextUtils.isEmpty(password1)){
             password.setError("Enter your password");
+            return;
         }
 
         progressDialog.setMessage("Please wait...");
@@ -103,7 +105,9 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(LoginActivity.this,DashBoardActivity.class);
                     startActivity(intent);
+                    Admin.init(firebaseAuth.getCurrentUser().getUid());
                     Social.getInstance();
+                    BulletinBoard.getInstance();
                     finish();
 
                 }
