@@ -104,13 +104,13 @@ public class BulletinBoard {
         addBulletin(id, newBulletin);
     }
 
-    public static void addBulletin(String id, String title, String description, String fifthRow, byte[] image, String url, String expiryDate) {
+    public static void addBulletin(String id, String title, String description, String fifthRow, Uri image, String url, String expiryDate) {
         // Similar function as above, except that image is provided
         Bulletin bulletin = new Bulletin(title, description, fifthRow, "", url, expiryDate);
         addImage(id, bulletin, image);
     }
 
-    public static void addImage(final String id, final Bulletin bulletin, byte[] image) {
+    public static void addImage(final String id, final Bulletin bulletin, Uri image) {
         // https://firebase.google.com/docs/storage/android/upload-files
         // Point to the person's image in jpg format
         String fileId = id + ".jpg";
@@ -118,7 +118,7 @@ public class BulletinBoard {
         Log.d(TAG, "Writing data: " + fileId);
 
         // Upload image
-        UploadTask uploadTask = imgRef.putBytes(image);
+        UploadTask uploadTask = imgRef.putFile(image);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
