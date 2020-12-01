@@ -11,7 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.sutd_social.firebase.Admin;
+import com.example.sutd_social.firebase.MatchingAlgo;
+import com.example.sutd_social.firebase.Social;
+import com.example.sutd_social.firebase.User;
 
 import java.util.ArrayList;
 
@@ -65,6 +71,8 @@ public class MatchFragment extends Fragment {
     private RecyclerView find_help_RecView;
     private EditText searchBar;
     private ArrayList<Find_Help> find_help_posts;
+    private Button btn_search;
+    private FindHelpRecViewAdapter adapter;
     //--
 
     @Override
@@ -75,12 +83,13 @@ public class MatchFragment extends Fragment {
 
         find_help_RecView = view.findViewById(R.id.find_help_RecView);
         searchBar =  view.findViewById(R.id.find_help_searchbar);
+        btn_search = view.findViewById(R.id.btn_search);
 
         find_help_posts= new ArrayList<>();
 
         find_help_posts.add(new Find_Help("Darren", "ISTD"));
 
-        FindHelpRecViewAdapter adapter = new FindHelpRecViewAdapter(getContext());
+        adapter = new FindHelpRecViewAdapter(getContext());
         adapter.setPosts(find_help_posts);
         find_help_RecView.setAdapter(adapter);
         find_help_RecView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
@@ -93,6 +102,29 @@ public class MatchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                find_help_posts.clear();
+                String search_txt = searchBar.getText().toString().toLowerCase(); //lower case to account for all typing
+                //Matching Algo
+                //MatchingAlgo.getSkillset(Admin.getUserid(), search_txt)
+
+
+                //Populating
+                for (String id : Social.getName().keySet()){
+                    if(Social.getSkills(id) != null) {
+                        for (String skill : Social.getSkills(id).keySet()) {
+                            if (skill.toLowerCase().equals(search_txt) ) {
+                                find_help_posts.add(new Find_Help(Social.getName(id), Social.getPillar(id)));
+                            }
+                        }
+                    }
+                }
+                adapter.setPosts(find_help_posts);
+                find_help_RecView.setAdapter(adapter);
+            }
+        });
 
     }
 }
