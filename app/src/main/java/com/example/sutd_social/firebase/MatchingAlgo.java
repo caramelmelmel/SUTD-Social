@@ -20,20 +20,28 @@ setter will set the method
 
 public class MatchingAlgo {
     private static final boolean lock = false;
+    //Tag for testing on the logcat standardised
     private static final String TAG = "MatchingAlgo";
-    //attributes for the algo
+    //attributes for the algo,self explanatory
     public static HashMap<String, String> student_name;
     public static HashMap<String, String> student_info;
     public static HashMap<String, String> student_pillar;
+
     //NOTE skillset confidence from the skills to the percentage confidence for eac
     public static HashMap<String, HashMap<String, Long>> skillset = new HashMap();
+
     //restore data into the following hashmap
     public static HashMap<String, long[]> sk_conf = new HashMap();
+
     //define an array of long to store the data
+    //we hard code a long because long is boss
     public long[] confidence = new long[1000];
+    //generate the match
     public double match;
+    //get the average to use as the base point comparison
     public long meanUserconf;
     public long avgNumSkill;
+    //generate user arraylist for the user object
     ArrayList<User> users = new ArrayList<User>();
     //create the following to store the attributes inside after adding
     private FirebaseUser mFirebaseAuth;
@@ -50,6 +58,12 @@ public class MatchingAlgo {
 
 
     //get skill that each user has to their confidence level
+    //hashmap of skill as the main connection point
+    /* Structure on firebase:
+    skill
+         |---- id
+                |--- level
+     */
     //skill->id->level
     public static HashMap<String, HashMap<String, Long>> getSkillset() {
         HashMap<String, HashMap<String, Long>> skillIdsLevel = new HashMap<>();
@@ -79,7 +93,9 @@ public class MatchingAlgo {
         meanUserconf = 0;
     }
 
-    //skill->id-> level
+    //getter method for the skillset, match the skill with the array values of confidence that each user
+    //has marked out for that specific skillset
+    //long array here is the collection of the scores of every user for average calculation later on
 
     public HashMap<String, long[]> retrieve() {
         for (Map.Entry<String, HashMap<String, Long>> skillIdEntry : skillset.entrySet()) {
@@ -94,13 +110,13 @@ public class MatchingAlgo {
         return sk_conf;
     }
 
-    //get the confidence level of that
+    //get the confidence array, the collection of confidence scores from the users and put it as an array list
     public long[] getConf_arr(HashMap<String, long[]> sk_conf, String sk) {
         confidence = sk_conf.get(sk);
         return confidence;
     }
 
-    //user intent for each skills
+    //average score of confidence of all the users in the database
     public long stats_bp(long[] confidence) {
         for (int a = 0; a < confidence.length; a++) {
             meanUserconf += confidence[a];
@@ -109,7 +125,7 @@ public class MatchingAlgo {
         return meanUserconf;
     }
 
-    //consider the other metric of number of skillsets
+    //consider the other metric of number of skillsets of each user if not everyone will have 100% match which is a pure waste of time writing this if that is what we are aiming for
     //for precision sake, we store in long
     public long getNumSkillsets(String id) {
         //get the number of skillsets from each user
@@ -118,6 +134,7 @@ public class MatchingAlgo {
     }
 
     //generate base point on num of skillsets
+    //average number of skillsets among the user population
     public long avgNumSkillsets() {
         //numId is the total number of users
         //query social.java
@@ -129,13 +146,14 @@ public class MatchingAlgo {
         return numOfSkills / numId;
     }
 
+    //get the confidence score of the user for the specific skill he has
+    //the input data is skill-> id -> confidence of that particular user
     public long getUserskillLevel(HashMap<String, HashMap<String, Long>> skillset, String skill, String id) {
         Log.i(TAG, "User skill is below");
         return skillset.get(skill).get(id);
     }
 
     //do the euclidean distance if the confidence is lower than the mean
-    //go
     public double generateEuclideanDistance(HashMap<String, HashMap<String, Long>> skillset, String skill, String id) {
         long x_dist = getUserskillLevel(skillset, skill, id) - meanUserconf;
         long y_dist = getNumSkillsets(id) - avgNumSkillsets();
@@ -182,8 +200,11 @@ public class MatchingAlgo {
     }
 
     //retrieve from above
-    //return the array list in the format of the id to the percent of
+    //return the array list in the format of the id -> calculated score of the user where the sorted array is in order
+    //of the skills score to populate the cards
+    //takes into the score of that user with respect to the skill
     public ArrayList<Map.Entry<String, Double>> getTheStats(String id, String skill) {
+        String putSkilltoLowerCase;
         sk_conf = retrieve();
         confidence = getConf_arr(sk_conf, skill);
         //get percent here
@@ -192,6 +213,12 @@ public class MatchingAlgo {
         ArrayList<Map.Entry<String, Double>> list = sortId(percent);
         return list;
 
+    }
+
+    public ArrayList<Map.Entry<String, Double>> skillsIsAllSmallCaps(String id, String skill){
+        String new_stuff = skill.toLowerCase();
+        ArrayList<Map.Entry<String, Double>> ls= getTheStats(id,new_stuff);
+        return ls;
     }
 
 
