@@ -9,12 +9,14 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class BulletinPopUp extends Activity {
 
     private Button btn_Confirm,btn_Cancel;
     private EditText edtTxtTitle;
     private EditText edtTxtDescription;
+    private EditText edtTxteventdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +25,15 @@ public class BulletinPopUp extends Activity {
 
         edtTxtTitle = findViewById(R.id.edtTxt_Title);
         edtTxtDescription = findViewById(R.id.edtTxt_description);
-
+        edtTxteventdate = findViewById(R.id.eventDate);
         btn_Confirm = findViewById(R.id.btn_Confirm);
+
 
         btn_Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                confirmCheck();
+                // add the following stuff to the
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 String txtTitle = edtTxtTitle.getText().toString();
                 String txtDescription = edtTxtDescription.getText().toString();
@@ -48,7 +53,6 @@ public class BulletinPopUp extends Activity {
                 finish();
             }
         });
-
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getRealMetrics(dm);
 
@@ -64,4 +68,16 @@ public class BulletinPopUp extends Activity {
 
         getWindow().setAttributes(params);
     }
-}
+
+        //prompt the user by checking if the inputs are justified correctly
+        private void confirmCheck(){
+        //set the instance attributes for this
+        String Txttitle = edtTxtTitle.getText().toString();
+        if(Txttitle.isEmpty()){
+            Toast.makeText(BulletinPopUp.this,"Please enter the event title!",Toast.LENGTH_LONG).show();
+            return;
+        }}
+
+
+    }
+
