@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.sutd_social.firebase.Admin;
@@ -21,6 +22,7 @@ public class BulletinPopUp extends Activity {
     private EditText edtTxtTitle;
     private EditText edtTxtDescription;
     private EditText edtTxteventdate;
+    private ImageView popupImageView;
 
 
     @Override
@@ -32,6 +34,7 @@ public class BulletinPopUp extends Activity {
         edtTxtDescription = findViewById(R.id.edtTxt_description);
         edtTxteventdate = findViewById(R.id.eventDate);
         btn_Confirm = findViewById(R.id.btn_Confirm);
+        popupImageView = findViewById(R.id.bulletin_popup_imageview); // on click this thing jun kai here
 
 
         btn_Confirm.setOnClickListener(new View.OnClickListener() {
