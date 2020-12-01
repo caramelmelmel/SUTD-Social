@@ -110,19 +110,17 @@ public class MatchFragment extends Fragment {
                 String search_txt = searchBar.getText().toString().toLowerCase(); //lower case to account for all typing
                 //Matching Algo
                 //MatchingAlgo.getSkillset(Admin.getUserid(), search_txt)
-//                MatchingAlgo matchingAlgo = new MatchingAlgo();
-//                ArrayList<Map.Entry<String, Double>> algo_arr =  matchingAlgo.skillsIsAllSmallCaps(Admin.getUserid(),search_txt);
-//                for(Map.Entry<String, Double> algo_entry : algo_arr){
-//                    String current_id = algo_entry.getKey();
-//                    Double confidence_lvl = algo_entry.getValue();
-//
-//                    find_help_posts.add(new Find_Help(Social.getName(current_id), Social.getPillar(current_id), confidence_lvl));
-//
-//                }
+               MatchingAlgo matchingAlgo = new MatchingAlgo();
+               ArrayList<Map.Entry<String, Double>> algo_arr =  matchingAlgo.skillsIsAllSmallCaps(Admin.getUserid(),search_txt);                for(Map.Entry<String, Double> algo_entry : algo_arr){
+                   String current_id = algo_entry.getKey();
+                   Double confidence_lvl = algo_entry.getValue();
+                   find_help_posts.add(new Find_Help(Social.getName(current_id), Social.getPillar(current_id), confidence_lvl));
+
+               }
 
 
                 //Populating
-                for (String id : Social.getName().keySet()){
+               /*for (String id : Social.getName().keySet()){
                     if(Social.getSkills(id) != null) {
                         for (String skill : Social.getSkills(id).keySet()) {
                             if (skill.toLowerCase().equals(search_txt) ) {
@@ -134,7 +132,7 @@ public class MatchFragment extends Fragment {
                             }
                         }
                     }
-                }
+                }*/
                 adapter.setPosts(find_help_posts);
                 find_help_RecView.setAdapter(adapter);
             }

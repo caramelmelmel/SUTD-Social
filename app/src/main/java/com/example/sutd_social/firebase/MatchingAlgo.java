@@ -150,6 +150,9 @@ public class MatchingAlgo {
     //the input data is skill-> id -> confidence of that particular user
     public long getUserskillLevel(HashMap<String, HashMap<String, Long>> skillset, String skill, String id) {
         Log.i(TAG, "User skill is below");
+        Log.i(TAG,String.valueOf(skillset.get(skill).keySet()));
+        Log.i(TAG,skill);
+        Log.i(TAG,id);
         return skillset.get(skill).get(id);
     }
 
@@ -168,7 +171,7 @@ public class MatchingAlgo {
 
     public HashMap<String, Double> percentageGenerated(HashMap<String, HashMap<String, Long>> skillset, String skill) {
         HashMap<String, Double> percent = new HashMap();
-        for (String id : sk_conf.keySet()) {
+        for (String id : skillset.get(skill).keySet()) {
             double distCompare = generateEuclideanDistance(skillset, skill, id);
             percent.put(id, distCompare);
         }
