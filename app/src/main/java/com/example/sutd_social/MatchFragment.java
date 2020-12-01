@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.sutd_social.firebase.Admin;
 import com.example.sutd_social.firebase.MatchingAlgo;
@@ -106,25 +107,31 @@ public class MatchFragment extends Fragment {
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                find_help_posts.clear();
-                String search_txt = searchBar.getText().toString().toLowerCase(); //lower case to account for all typing
-                //Matching Algo
-                //MatchingAlgo.getSkillset(Admin.getUserid(), search_txt)
-               MatchingAlgo matchingAlgo = new MatchingAlgo();
-               ArrayList<Map.Entry<String, Double>> algo_arr =  matchingAlgo.skillsIsAllSmallCaps(Admin.getUserid(),search_txt);
-               for(Map.Entry<String, Double> algo_entry : algo_arr){
-                   String current_id = algo_entry.getKey();
-                   Double confidence_lvl = algo_entry.getValue();
-                   String total_skills = "";
+                if(searchBar.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(),"Please input a skill", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    find_help_posts.clear();
+                    String search_txt = searchBar.getText().toString().toLowerCase(); //lower case to account for all typing
+                    //Matching Algo
+                    //MatchingAlgo.getSkillset(Admin.getUserid(), search_txt)
+                    MatchingAlgo matchingAlgo = new MatchingAlgo();
+                    ArrayList<Map.Entry<String, Double>> algo_arr =  matchingAlgo.skillsIsAllSmallCaps(Admin.getUserid(),search_txt);
+                    for(Map.Entry<String, Double> algo_entry : algo_arr){
+                        String current_id = algo_entry.getKey();
+                        Double confidence_lvl = algo_entry.getValue();
+                        String total_skills = "";
 
-                    for(String all_skill : Social.getSkills(current_id).keySet()){
-                        total_skills = total_skills + all_skill + "\n";
+                        for(String all_skill : Social.getSkills(current_id).keySet()){
+                            total_skills = total_skills + all_skill + "\n";
+                        }
+
+
+                        find_help_posts.add(new Find_Help(Social.getName(current_id), Social.getPillar(current_id), confidence_lvl,total_skills));
+
                     }
+                }
 
-
-                   find_help_posts.add(new Find_Help(Social.getName(current_id), Social.getPillar(current_id), confidence_lvl,total_skills));
-
-               }
 
 
                 //Populating
