@@ -24,15 +24,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        // Search function - switch to search activity
-        Button yourButton = (Button) findViewById(R.id.goSearch);
-
-        yourButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SearchSocial.class));
-            }
-        });
-
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         openFragment(new AccountFragment());
 

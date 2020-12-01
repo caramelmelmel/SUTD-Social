@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"></activity>
 
         android:theme="@style/Theme.BottomNavBar">
         <activity android:name="com.example.sutd_social.Bulletin_inner_post_popup"
