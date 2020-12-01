@@ -126,7 +126,11 @@ public class MatchFragment extends Fragment {
                     if(Social.getSkills(id) != null) {
                         for (String skill : Social.getSkills(id).keySet()) {
                             if (skill.toLowerCase().equals(search_txt) ) {
-                                find_help_posts.add(new Find_Help(Social.getName(id), Social.getPillar(id)));
+                                String total_skills = "";
+                                for(String all_skill : Social.getSkills(id).keySet()){
+                                    total_skills = total_skills + all_skill + "\n";
+                                }
+                                find_help_posts.add(new Find_Help(Social.getName(id), Social.getPillar(id),total_skills));
                             }
                         }
                     }

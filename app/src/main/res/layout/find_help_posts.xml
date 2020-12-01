@@ -32,6 +32,7 @@
             <TextView
                 android:id="@+id/cardStudentName"
                 android:layout_toRightOf="@id/cardProfilePicture"
+                android:layout_toLeftOf="@+id/card_dotbutton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20px"

@@ -11,6 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sutd_social.firebase.MatchingAlgo;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class FindHelpRecViewAdapter extends RecyclerView.Adapter<FindHelpRecViewAdapter.ViewHolder> {
@@ -44,6 +48,12 @@ public class FindHelpRecViewAdapter extends RecyclerView.Adapter<FindHelpRecView
 //        });
         holder.StudentName.setText(find_help_posts.get(position).getName());
         holder.StudentPillar.setText(find_help_posts.get(position).getPillar());
+//        if(!find_help_posts.get(position).getConfidence_lvl().toString().isEmpty()){
+//            holder.MatchRate.setText(find_help_posts.get(position).getConfidence_lvl().toString());
+//        }
+        //holder.MatchRate.setText(find_help_posts.get(position).getConfidence_lvl().toString());
+        holder.Skills.setText(find_help_posts.get(position).getSkills());
+
 
     }
 
@@ -72,6 +82,8 @@ public class FindHelpRecViewAdapter extends RecyclerView.Adapter<FindHelpRecView
             ProfilePicture = itemView.findViewById(R.id.cardProfilePicture);
             StudentName = itemView.findViewById(R.id.cardStudentName);
             StudentPillar = itemView.findViewById(R.id.cardStudentPillar);
+            MatchRate = itemView.findViewById(R.id.cardMatchRate);
+            Skills = itemView.findViewById(R.id.cardTagList);
             //parent = itemView.findViewById(R.id.parent);  // Have to instantiate to access from OnBindViewHolder Method
         }
     }
