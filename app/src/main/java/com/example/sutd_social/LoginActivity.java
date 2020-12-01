@@ -23,6 +23,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import static java.lang.Thread.sleep;
+
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private EditText emailET;
@@ -48,11 +50,18 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null) {
             // user is logged in
             Log.d(TAG, "User is already logged in");
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-            startActivity(intent);
             Admin.init(firebaseAuth.getCurrentUser().getUid());
             Social.getInstance();
             BulletinBoard.getInstance();
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+
+            // Time for firebase to fetch data
+            try {
+                sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             finish();
         } else {
             // user is not logged in

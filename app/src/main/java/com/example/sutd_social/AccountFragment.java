@@ -1,11 +1,16 @@
 package com.example.sutd_social;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -78,9 +83,33 @@ public class AccountFragment extends Fragment {
 //        editText_skills = view.findViewById(R.id.add_skills); // skill edit text
 //        btn_save = view.findViewById(R.id.save_profile);
 
+        // Show DisplayPic
+        String url = Social.getDisplayPic(Admin.getUserid());
+        Social.displayImage(getActivity(), url, view.findViewById(R.id.profile_picture));
+
+        // Get image from user
+        ImageButton profile_pic = view.findViewById(R.id.profile_picture);
+        profile_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(openGallery, 10);
+            }
+        });
+
         return view;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==10) {
+            if (resultCode== Activity.RESULT_OK) {
+                Uri imageUri = data.getData();
+                Social.addImage(Admin.getUserid(), imageUri);
+            }
+        }
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

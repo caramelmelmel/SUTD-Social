@@ -73,6 +73,7 @@
 package com.example.sutd_social.firebase;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
@@ -80,6 +81,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.example.sutd_social.LoginActivity;
+import com.example.sutd_social.MainActivity;
 import com.example.sutd_social.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -182,7 +185,7 @@ public class Social {
     }
 
     //uploads the person image
-    public static void addImage(final String id, byte[] image) {
+    public static void addImage(final String id, Uri image) {
         // https://firebase.google.com/docs/storage/android/upload-files
         // Point to the person's image in jpg format
         String fileId = id + ".jpg";
@@ -190,7 +193,7 @@ public class Social {
         Log.d(TAG, "Writing data: " + fileId);
 
         // Upload image
-        UploadTask uploadTask = userdpRef.putBytes(image);
+        UploadTask uploadTask = userdpRef.putFile(image);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -295,6 +298,9 @@ public class Social {
     }
 
     public static String getDisplayPic(String id) {
+        Log.d(TAG, "getDisplayPic: " + id);
+        Log.d(TAG, "getDisplayPic: " + users.keySet());
+        Log.d(TAG, "getDisplayPic: " + users.get("DisplayPic").keySet());
         return (String) users.get("DisplayPic").get(id);
     }
 
