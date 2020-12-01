@@ -37,6 +37,25 @@ public class Bulletin {
         this.title = title;
         this.description = description;
     }
+    //4 way constructor
+
+
+    public Bulletin(String title, String description, String fifthRow, String expiryDate) {
+        this.title = title;
+        this.description = description;
+        this.fifthRow = fifthRow;
+        this.expiryDate = expiryDate;
+    }
+    //5 way constructor
+
+
+    public Bulletin(String title, String description, String fifthRow, String image, String expiryDate) {
+        this.title = title;
+        this.description = description;
+        this.fifthRow = fifthRow;
+        this.image = image;
+        this.expiryDate = expiryDate;
+    }
 
     public static String dateFormat(Date date) {
         return dateFormat.format(date);

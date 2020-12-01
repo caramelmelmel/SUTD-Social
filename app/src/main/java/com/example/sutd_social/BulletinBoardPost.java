@@ -1,11 +1,17 @@
 package com.example.sutd_social;
 
 public class BulletinBoardPost {
-    private String postTitle, postDescription;
+    private String postTitle, postDescription,postdate;
 
     public BulletinBoardPost(String postTitle, String postDescription) {
         this.postTitle = postTitle;
         this.postDescription = postDescription;
+    }
+
+    public BulletinBoardPost(String postTitle, String postDescription, String postdate) {
+        this.postTitle = postTitle;
+        this.postDescription = postDescription;
+        this.postdate = postdate;
     }
 
     public String getPostTitle() {

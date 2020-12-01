@@ -142,6 +142,7 @@ public class BulletinFragment extends Fragment {
             if(resultCode == Activity.RESULT_OK){
                 String txtTitle = data.getStringExtra("txtTitle");
                 String txtDescription = data.getStringExtra("txtDescription");
+                String txtDate = data.getStringExtra("txtDate");
 //                textView.setText(str1);
 //                textView2.setText(str2);
                 if(txtTitle.length() == 0 && txtDescription.length() == 0){
@@ -155,7 +156,7 @@ public class BulletinFragment extends Fragment {
                     Toast.makeText(getContext(),"Please fill in the Description", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription));
+                    bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription,txtDate));
                     adapter.setPosts(bulletinBoardPosts);
                 }
 

@@ -11,12 +11,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sutd_social.firebase.Admin;
+import com.example.sutd_social.firebase.Bulletin;
+import com.example.sutd_social.firebase.BulletinBoard;
+
 public class BulletinPopUp extends Activity {
 
     private Button btn_Confirm,btn_Cancel;
     private EditText edtTxtTitle;
     private EditText edtTxtDescription;
     private EditText edtTxteventdate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +42,13 @@ public class BulletinPopUp extends Activity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 String txtTitle = edtTxtTitle.getText().toString();
                 String txtDescription = edtTxtDescription.getText().toString();
+                String txtDate = edtTxteventdate.getText().toString();
+                //adding to firebase
+                BulletinBoard.addBulletin(Admin.getUserid(), new Bulletin(txtTitle,txtDescription));
+
                 intent.putExtra("txtTitle", txtTitle);
                 intent.putExtra("txtDescription", txtDescription);
+                intent.putExtra("txtDate", txtDate);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }
