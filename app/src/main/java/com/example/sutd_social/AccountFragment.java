@@ -105,15 +105,58 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<Integer> chipIds = skillGroup.getCheckedChipIds();
-        for (Integer chipId: chipIds) {
-            Chip skillChip = skillGroup.findViewById(chipId);
-            skillChip.setOnCloseIconClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    skillGroup.removeView(skillChip);
-                }
-            });
+        // display image here
+        User user = Social.getUser(Admin.getUserid());
+        username.setText(user.name);
+        bio.setText(user.info);
+        fifthRows.setText(user.fifthRow);
+        teleContact.setText(user.telegram);
+
+        String pillar = user.pillar;
+        switch (pillar) {
+            case "Freshmore": {
+                Chip pillarChip = view.findViewById(R.id.freshmore_chip);
+                pillarChip.setChecked(true);
+                break;
+            }
+            case "ASD": {
+                Chip pillarChip = view.findViewById(R.id.asd_chip);
+                pillarChip.setChecked(true);
+                break;
+            }
+            case "EPD": {
+                Chip pillarChip = view.findViewById(R.id.epd_chip);
+                pillarChip.setChecked(true);
+                break;
+            }
+            case "ESD": {
+                Chip pillarChip = view.findViewById(R.id.esd_chip);
+                pillarChip.setChecked(true);
+                break;
+            }
+            case "ISTD": {
+                Chip pillarChip = view.findViewById(R.id.istd_chip);
+                pillarChip.setChecked(true);
+                break;
+            }
+        }
+
+        HashMap<String, Long> skills = user.skills;
+        if (!skills.isEmpty()) {
+            for (String skill: skills.keySet()) {
+                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                Chip newChip = (Chip) inflater.inflate(R.layout.skill_chip, null);
+                newChip.setText(skill);
+                newChip.setCheckedIcon(null);
+                skillGroup.addView(newChip);
+
+                newChip.setOnCloseIconClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        skillGroup.removeView(newChip);
+                    }
+                });
+            }
         }
 
         inputSkills.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -177,8 +220,6 @@ public class AccountFragment extends Fragment {
                 if (!skills.isEmpty()) {
                     Social.setAttr("Skills", Admin.getUserid(), skills);
                 }
-
-
             }
         });
     }
