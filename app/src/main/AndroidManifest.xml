@@ -24,10 +24,10 @@
 
         android:theme="@style/Theme.BottomNavBar">
         <activity android:name="com.example.sutd_social.Bulletin_inner_post_popup"
-            android:theme="@style/Theme.BottomNavBar.PopMe"></activity>
+            android:theme="@style/AppTheme.Popme"></activity>
         <activity
             android:name="com.example.sutd_social.BulletinPopUp"
-            android:theme="@style/Theme.BottomNavBar.PopMe" />
+            android:theme="@style/AppTheme.Popme" ></activity>
         <activity android:name="com.example.sutd_social.MainActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
