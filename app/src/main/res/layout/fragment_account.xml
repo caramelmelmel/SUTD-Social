@@ -81,6 +81,7 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checkable="true"
             android:text="Freshmore" />
 
         <com.google.android.material.chip.Chip
@@ -88,6 +89,7 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checkable="true"
             android:text="ASD" />
 
         <com.google.android.material.chip.Chip
@@ -95,6 +97,7 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checkable="true"
             android:text="EPD" />
 
         <com.google.android.material.chip.Chip
@@ -102,6 +105,7 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checkable="true"
             android:text="ESD" />
 
         <com.google.android.material.chip.Chip
@@ -109,6 +113,7 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checkable="true"
             android:text="ISTD" />
 
     </com.google.android.material.chip.ChipGroup>

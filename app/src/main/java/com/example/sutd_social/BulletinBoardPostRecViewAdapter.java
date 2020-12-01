@@ -51,6 +51,8 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
         holder.postDescription.setText(posts.get(position).getPostDescription());
         //adding image
         BulletinBoard.displayImage((Activity) context, posts.get(position).getBulletin_url(),holder.cardImage);
+        String inside_url = posts.get(position).getBulletin_url();
+
 
         holder.BulletinBoardParent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +60,12 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
 
                 Activity origin = (Activity) context;
 
-                origin.startActivityForResult(new Intent(context,Bulletin_inner_post_popup.class),activity_code_inner);
+                Intent inner_intent = new Intent(context,Bulletin_inner_post_popup.class);
+                inner_intent.putExtra("inner_title", posts.get(position).getPostTitle().toString());
+                inner_intent.putExtra("inner_description", posts.get(position).getPostDescription().toString());
+                inner_intent.putExtra("inner_picture", inside_url);
+                //origin.startActivity(inner_intent);
+                origin.startActivityForResult(inner_intent,activity_code_inner);
 
             }
         });
@@ -82,6 +89,8 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
         private final TextView postDescription;  // initiallize all widgets that were inside the new layout file
         private final CardView BulletinBoardParent;
         private ImageView cardImage;
+        private TextView title_inner;
+        private TextView description_inner;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //card_title, card_content
@@ -89,6 +98,8 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
             postDescription = itemView.findViewById(R.id.card_content);
             BulletinBoardParent = itemView.findViewById(R.id.bulletin_board_post_layout);  // Have to instantiate to access from OnBindViewHolder Method
             cardImage = itemView.findViewById(R.id.card_image);
+            title_inner = itemView.findViewById(R.id.txtView_title_inner);
+            description_inner = itemView.findViewById(R.id.txtView_Description_inner);
         }
     }
 }

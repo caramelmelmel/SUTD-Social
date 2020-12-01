@@ -39,6 +39,7 @@ public class Bulletin {
         this.title = title;
         this.description = description;
     }
+
     //4 way constructor
 
 

@@ -1,10 +1,13 @@
 package com.example.sutd_social;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.media.Image;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.sutd_social.R;
@@ -24,6 +28,7 @@ import com.example.sutd_social.firebase.Social;
 import com.example.sutd_social.firebase.User;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -85,7 +90,7 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,  @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
         displayPic = view.findViewById(R.id.profile_picture);
@@ -105,15 +110,83 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<Integer> chipIds = skillGroup.getCheckedChipIds();
-        for (Integer chipId: chipIds) {
-            Chip skillChip = skillGroup.findViewById(chipId);
-            skillChip.setOnCloseIconClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    skillGroup.removeView(skillChip);
-                }
-            });
+        // display image here
+        User user = Social.getUser(Admin.getUserid());
+        username.setText(user.name);
+        bio.setText(user.info);
+        fifthRows.setText(user.fifthRow);
+        teleContact.setText(user.telegram);
+
+        String pillar = user.pillar;
+        switch (pillar) {
+            case "Freshmore": {
+                Chip pillarChip = view.findViewById(R.id.freshmore_chip);
+                pillarChip.setChecked(true);
+                break;
+            }
+            case "ASD": {
+                Chip pillarChip = view.findViewById(R.id.asd_chip);
+                pillarChip.setChecked(true);
+                break;
+            }
+            case "EPD": {
+                Chip pillarChip = view.findViewById(R.id.epd_chip);
+                pillarChip.setChecked(true);
+                break;
+            }
+            case "ESD": {
+                Chip pillarChip = view.findViewById(R.id.esd_chip);
+                pillarChip.setChecked(true);
+                break;
+            }
+            case "ISTD": {
+                Chip pillarChip = view.findViewById(R.id.istd_chip);
+                pillarChip.setChecked(true);
+                break;
+            }
+        }
+
+        HashMap<String, Long> skills = user.skills;
+        if (!skills.isEmpty()) {
+            for (String skill: skills.keySet()) {
+                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                Chip newChip = (Chip) inflater.inflate(R.layout.skill_chip, null);
+                newChip.setText(skill);
+                skillGroup.addView(newChip);
+
+                newChip.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle("Confidence Level");
+
+                        EditText input = new EditText(getContext());
+                        String skillName = newChip.getText().toString();
+                        input.setHint(skills.get(skillName).toString());
+                        input.setGravity(Gravity.CENTER);
+                        builder.setView(input);
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String inText = input.getText().toString();
+                                int integer = Integer.parseInt(inText);
+                                if (integer > 0 && integer < 100) {
+                                    skills.put(skillName, new Long(input.getText().toString()));
+                                }
+                            }
+                        });
+                        builder.show();
+                    }
+                });
+
+                newChip.setOnCloseIconClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        skills.remove(newChip.getText().toString());
+                        skillGroup.removeView(newChip);
+                    }
+                });
+            }
         }
 
         inputSkills.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -121,14 +194,40 @@ public class AccountFragment extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 Chip newChip = (Chip) inflater.inflate(R.layout.skill_chip, null);
-                newChip.setText(inputSkills.getText());
-                newChip.setCheckedIcon(null);
+                newChip.setText(inputSkills.getText().toString());
                 skillGroup.addView(newChip);
+                skills.put(inputSkills.getText().toString(), new Long(50));
                 inputSkills.setText("");
+
+                newChip.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle("Confidence Level");
+
+                        EditText input = new EditText(getContext());
+                        String skillName = newChip.getText().toString();
+                        input.setHint(skills.get(skillName).toString());
+                        input.setGravity(Gravity.CENTER);
+                        builder.setView(input);
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String inText = input.getText().toString();
+                                int integer = Integer.parseInt(inText);
+                                if (integer > 0 && integer < 100) {
+                                    skills.put(skillName, new Long(input.getText().toString()));
+                                }
+                            }
+                        });
+                        builder.show();
+                    }
+                });
 
                 newChip.setOnCloseIconClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        skills.remove(newChip.getText().toString());
                         skillGroup.removeView(newChip);
                     }
                 });
@@ -167,18 +266,7 @@ public class AccountFragment extends Fragment {
                     Social.setAttr("Pillar", Admin.getUserid(), studentPillar);
                 }
 
-                HashMap<String, Long> skills = new HashMap<>();
-                List<Integer> chipIds = skillGroup.getCheckedChipIds();
-                for (Integer chipId: chipIds) {
-                    Chip skillChip = skillGroup.findViewById(chipId);
-                    skills.put(skillChip.getText().toString(), new Long(50));
-                }
-
-                if (!skills.isEmpty()) {
-                    Social.setAttr("Skills", Admin.getUserid(), skills);
-                }
-
-
+                Social.setAttr("Skills", Admin.getUserid(), skills);
             }
         });
     }
