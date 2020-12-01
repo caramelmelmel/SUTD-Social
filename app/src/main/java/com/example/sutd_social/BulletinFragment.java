@@ -143,8 +143,7 @@ public class BulletinFragment extends Fragment {
                 String txtTitle = data.getStringExtra("txtTitle");
                 String txtDescription = data.getStringExtra("txtDescription");
                 String txtDate = data.getStringExtra("txtDate");
-                //jun kai uncomment this
-                //String txtUrl = data.getStringExtra("txtUrl");
+                String txtUrl = data.getStringExtra("txtUrl");
 
 
 //                textView.setText(str1);
@@ -160,9 +159,8 @@ public class BulletinFragment extends Fragment {
                     Toast.makeText(getContext(),"Please fill in the Description", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription,txtDate));
-                    //jun kai comment top and uncomment bottom after
-                    //bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription,txtDate,txtUrl));
+                    //bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription,txtDate));
+                    bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription,txtDate,txtUrl));
                     adapter.setPosts(bulletinBoardPosts);
                 }
 

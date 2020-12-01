@@ -298,9 +298,6 @@ public class Social {
     }
 
     public static String getDisplayPic(String id) {
-        Log.d(TAG, "getDisplayPic: " + id);
-        Log.d(TAG, "getDisplayPic: " + users.keySet());
-        Log.d(TAG, "getDisplayPic: " + users.get("DisplayPic").keySet());
         return (String) users.get("DisplayPic").get(id);
     }
 

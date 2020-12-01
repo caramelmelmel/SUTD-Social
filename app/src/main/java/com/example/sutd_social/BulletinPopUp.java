@@ -2,23 +2,29 @@ package com.example.sutd_social;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.example.sutd_social.firebase.Admin;
 import com.example.sutd_social.firebase.Bulletin;
 import com.example.sutd_social.firebase.BulletinBoard;
+import com.example.sutd_social.firebase.Social;
 
 public class BulletinPopUp extends Activity {
 
-    private Button btn_Confirm,btn_Cancel;
+    private Button btn_Confirm, btn_Cancel;
     private EditText edtTxtTitle;
     private EditText edtTxtDescription;
     private EditText edtTxteventdate;
@@ -34,7 +40,16 @@ public class BulletinPopUp extends Activity {
         edtTxtDescription = findViewById(R.id.edtTxt_description);
         edtTxteventdate = findViewById(R.id.eventDate);
         btn_Confirm = findViewById(R.id.btn_Confirm);
-        popupImageView = findViewById(R.id.bulletin_popup_imageview); // on click this thing jun kai here
+        popupImageView = findViewById(R.id.bulletin_popup_imageview);
+
+        // Get image from user
+        popupImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(openGallery, 10);
+            }
+        });
 
 
         btn_Confirm.setOnClickListener(new View.OnClickListener() {
@@ -47,8 +62,17 @@ public class BulletinPopUp extends Activity {
                 String txtDescription = edtTxtDescription.getText().toString();
                 String txtDate = edtTxteventdate.getText().toString();
                 //adding to firebase
-                BulletinBoard.addBulletin(Admin.getUserid(), new Bulletin(txtTitle,txtDescription));
-                //Jun kai do your image stuff here
+                BulletinBoard.addBulletin(Admin.getUserid(), new Bulletin(txtTitle, txtDescription));
+
+                // Get image from user
+                ImageButton profile_pic = view.findViewById(R.id.bulletin_popup_imageview);
+                profile_pic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent openGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(openGallery, 10);
+                    }
+                });
 
                 //------------
                 // rmb to do intent put extra for url like below here pls give "txtUrl" as name
@@ -76,7 +100,7 @@ public class BulletinPopUp extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width *0.83), (int)(height*0.85));
+        getWindow().setLayout((int) (width * 0.83), (int) (height * 0.85));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
@@ -86,15 +110,25 @@ public class BulletinPopUp extends Activity {
         getWindow().setAttributes(params);
     }
 
-        //prompt the user by checking if the inputs are justified correctly
-        private void confirmCheck(){
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri imageUri = data.getData();
+                getIntent().putExtra("txtUrl", imageUri);
+            }
+        }
+    }
+
+    //prompt the user by checking if the inputs are justified correctly
+    private void confirmCheck() {
         //set the instance attributes for this
         String Txttitle = edtTxtTitle.getText().toString();
-        if(Txttitle.isEmpty()){
-            Toast.makeText(BulletinPopUp.this,"Please enter the event title!",Toast.LENGTH_LONG).show();
+        if (Txttitle.isEmpty()) {
+            Toast.makeText(BulletinPopUp.this, "Please enter the event title!", Toast.LENGTH_LONG).show();
             return;
-        }}
-
-
+        }
     }
+}
 
