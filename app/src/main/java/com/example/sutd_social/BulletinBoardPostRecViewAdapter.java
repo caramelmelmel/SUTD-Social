@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,8 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
 //        });
         holder.postTitle.setText(posts.get(position).getPostTitle());
         holder.postDescription.setText(posts.get(position).getPostDescription());
+        //adding image
+
 
         holder.BulletinBoardParent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,12 +79,14 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
         private final TextView postTitle;
         private final TextView postDescription;  // initiallize all widgets that were inside the new layout file
         private final CardView BulletinBoardParent;
+        private ImageView cardImage;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //card_title, card_content
             postTitle = itemView.findViewById(R.id.card_title);  // Have to initialize findViewByID through the view object in this class
             postDescription = itemView.findViewById(R.id.card_content);
             BulletinBoardParent = itemView.findViewById(R.id.bulletin_board_post_layout);  // Have to instantiate to access from OnBindViewHolder Method
+            cardImage = itemView.findViewById(R.id.card_image);
         }
     }
 }
