@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/bulletin_board_post_layout"
+    android:elevation="10dp"
+    app:cardCornerRadius="4dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <TextView
+                    android:id="@+id/card_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#4AFF9B"
+                    android:padding="20px"
+                    android:text="Hello"
+                    android:textSize="20sp" />
+
+                <ImageButton
+                    android:id="@+id/card_dotbutton"
+                    style="?android:borderlessButtonStyle"
+                    android:layout_width="120px"
+                    android:layout_height="120px"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_action_bulletin" />
+
+                <ImageView
+                    android:id="@+id/card_image"
+                    android:layout_below="@+id/card_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:layout_centerHorizontal="true"
+                    android:maxHeight="300px"
+                    android:src="@drawable/ic_action_account" />
+
+                <TextView
+                    android:id="@+id/card_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/card_image"
+                    android:layout_marginLeft="25px"
+                    android:layout_marginRight="25px"
+                    android:layout_marginTop="10px"
+                    android:layout_marginBottom="10px"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:text="Lorem ipsum dolor amet, consectetur adipiscing elit. Donec vel pretium mi. Ut ut lectus commodo, consectetur arcu vitae, ornare nibh.Lorem ipsum dolor amet, consectetur adipiscing elit. Donec vel pretium mi. Ut ut lectus commodo, consectetur arcu vitae, ornare nibh."
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "369845528299",
+    "firebase_url": "https://sutdsocial-fabcb.firebaseio.com",
+    "project_id": "sutdsocial-fabcb",
+    "storage_bucket": "sutdsocial-fabcb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369845528299:android:c03e84aaa60e5ca60900ae",
+        "android_client_info": {
+          "package_name": "com.example.sutd_social"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369845528299-aov97k2hmp93htaeii0b9dvocaacpdej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXB1tXp68lFbDSBdGjnEpxIB55Oqyjbo4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369845528299-aov97k2hmp93htaeii0b9dvocaacpdej.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
