@@ -111,10 +111,18 @@ public class MatchFragment extends Fragment {
                 //Matching Algo
                 //MatchingAlgo.getSkillset(Admin.getUserid(), search_txt)
                MatchingAlgo matchingAlgo = new MatchingAlgo();
-               ArrayList<Map.Entry<String, Double>> algo_arr =  matchingAlgo.skillsIsAllSmallCaps(Admin.getUserid(),search_txt);                for(Map.Entry<String, Double> algo_entry : algo_arr){
+               ArrayList<Map.Entry<String, Double>> algo_arr =  matchingAlgo.skillsIsAllSmallCaps(Admin.getUserid(),search_txt);
+               for(Map.Entry<String, Double> algo_entry : algo_arr){
                    String current_id = algo_entry.getKey();
                    Double confidence_lvl = algo_entry.getValue();
-                   find_help_posts.add(new Find_Help(Social.getName(current_id), Social.getPillar(current_id), confidence_lvl));
+                   String total_skills = "";
+
+                    for(String all_skill : Social.getSkills(current_id).keySet()){
+                        total_skills = total_skills + all_skill + "\n";
+                    }
+
+
+                   find_help_posts.add(new Find_Help(Social.getName(current_id), Social.getPillar(current_id), confidence_lvl,total_skills));
 
                }
 
