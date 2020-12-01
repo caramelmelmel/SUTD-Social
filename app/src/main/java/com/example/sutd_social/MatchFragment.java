@@ -20,6 +20,8 @@ import com.example.sutd_social.firebase.Social;
 import com.example.sutd_social.firebase.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,7 +89,6 @@ public class MatchFragment extends Fragment {
 
         find_help_posts= new ArrayList<>();
 
-        find_help_posts.add(new Find_Help("Darren", "ISTD"));
 
         adapter = new FindHelpRecViewAdapter(getContext());
         adapter.setPosts(find_help_posts);
@@ -109,6 +110,15 @@ public class MatchFragment extends Fragment {
                 String search_txt = searchBar.getText().toString().toLowerCase(); //lower case to account for all typing
                 //Matching Algo
                 //MatchingAlgo.getSkillset(Admin.getUserid(), search_txt)
+//                MatchingAlgo matchingAlgo = new MatchingAlgo();
+//                ArrayList<Map.Entry<String, Double>> algo_arr =  matchingAlgo.skillsIsAllSmallCaps(Admin.getUserid(),search_txt);
+//                for(Map.Entry<String, Double> algo_entry : algo_arr){
+//                    String current_id = algo_entry.getKey();
+//                    Double confidence_lvl = algo_entry.getValue();
+//
+//                    find_help_posts.add(new Find_Help(Social.getName(current_id), Social.getPillar(current_id), confidence_lvl));
+//
+//                }
 
 
                 //Populating
