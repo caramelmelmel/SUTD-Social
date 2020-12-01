@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -28,6 +29,7 @@ public class BulletinPopUp extends Activity {
     private EditText edtTxtTitle;
     private EditText edtTxtDescription;
     private EditText edtTxteventdate;
+    private Uri imageUri;
     private ImageView popupImageView;
 
 
@@ -61,18 +63,11 @@ public class BulletinPopUp extends Activity {
                 String txtTitle = edtTxtTitle.getText().toString();
                 String txtDescription = edtTxtDescription.getText().toString();
                 String txtDate = edtTxteventdate.getText().toString();
-                //adding to firebase
-                BulletinBoard.addBulletin(Admin.getUserid(), new Bulletin(txtTitle, txtDescription));
 
-                // Get image from user
-                ImageButton profile_pic = view.findViewById(R.id.bulletin_popup_imageview);
-                profile_pic.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent openGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(openGallery, 10);
-                    }
-                });
+                // adding to firebase
+                Bulletin bulletin = new Bulletin(txtTitle, txtDescription, "", "", txtDate);
+                Log.i("BulletinBoard", "onClick: " + imageUri.toString());
+                BulletinBoard.addImage(Admin.getUserid(), bulletin, imageUri);
 
                 //------------
                 // rmb to do intent put extra for url like below here pls give "txtUrl" as name
@@ -80,6 +75,7 @@ public class BulletinPopUp extends Activity {
                 intent.putExtra("txtTitle", txtTitle);
                 intent.putExtra("txtDescription", txtDescription);
                 intent.putExtra("txtDate", txtDate);
+                intent.putExtra("txtUrl", imageUri.toString());
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }
@@ -115,8 +111,7 @@ public class BulletinPopUp extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10) {
             if (resultCode == Activity.RESULT_OK) {
-                Uri imageUri = data.getData();
-                getIntent().putExtra("txtUrl", imageUri);
+                imageUri = data.getData();
             }
         }
     }

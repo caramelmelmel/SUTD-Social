@@ -19,6 +19,8 @@ public class Bulletin {
 
     Bulletin(){}
 
+
+
     Bulletin(String title, String description, String fifthRow, String image, String url, String expiryDate) {
         this.fifthRow = fifthRow;
         this.title = title;

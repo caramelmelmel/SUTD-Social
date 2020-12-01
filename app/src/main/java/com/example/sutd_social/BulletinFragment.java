@@ -101,7 +101,9 @@ public class BulletinFragment extends Fragment {
         for (String key : keySet ){
             String individual_post_title = BulletinBoard.getBulletin(key).title;
             String individual_post_description = BulletinBoard.getBulletin(key).description;
-            bulletinBoardPosts.add(new BulletinBoardPost(individual_post_title,individual_post_description));
+            String individual_post_expiryDate = BulletinBoard.getBulletin(key).expiryDate;
+            String individual_post_image = BulletinBoard.getBulletin(key).image;
+            bulletinBoardPosts.add(new BulletinBoardPost(individual_post_title,individual_post_description,individual_post_expiryDate,individual_post_image));
         }
 
 
@@ -160,11 +162,9 @@ public class BulletinFragment extends Fragment {
                 }
                 else{
                     //bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription,txtDate));
-                    bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription,txtDate,txtUrl));
+                    bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription,txtDate,""));  // TODO: txtURL is uri of local storage, not firebase link
                     adapter.setPosts(bulletinBoardPosts);
                 }
-
-
             }
         }
     }

@@ -23,6 +23,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 
+import static java.lang.Thread.sleep;
+
 public class BulletinBoard {
     private static final BulletinBoard ourInstance = new BulletinBoard();
     private static final String TAG = "BulletinBoard";
@@ -116,6 +118,7 @@ public class BulletinBoard {
         String fileId = id + ".jpg";
         final StorageReference imgRef = bulletinImgRef.child(fileId);
         Log.d(TAG, "Writing data: " + fileId);
+        Log.d(TAG, "addImage: " + image.toString());
 
         // Upload image
         UploadTask uploadTask = imgRef.putFile(image);
@@ -127,9 +130,16 @@ public class BulletinBoard {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.d(TAG, "onSuccess: Image uploaded" );
                 // Success!
                 // Get file url to upload url onto firebase
-                bulletinImgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                imgRef.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+                imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         Uri imageUrl = uri;
