@@ -10,7 +10,6 @@ public class Find_Help {
     public Find_Help(String name, String pillar) {
         this.name = name;
         this.pillar = pillar;
-        this.profilePicture = profilePicture;
     }
 
     public Find_Help(String name, String pillar, Double confidence_lvl, String skills) {
@@ -40,6 +39,13 @@ public class Find_Help {
         this.confidence_lvl = confidence_lvl;
     }
 
+    public Find_Help(String name, String pillar, String profilePicture, String skills) {
+        this.name = name;
+        this.pillar = pillar;
+        this.profilePicture = profilePicture;
+        this.skills = skills;
+    }
+
     public String getName() {
         return name;
     }
@@ -62,5 +68,13 @@ public class Find_Help {
 
     public void setSkills(String skills) {
         this.skills = skills;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }

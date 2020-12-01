@@ -143,6 +143,10 @@ public class BulletinFragment extends Fragment {
                 String txtTitle = data.getStringExtra("txtTitle");
                 String txtDescription = data.getStringExtra("txtDescription");
                 String txtDate = data.getStringExtra("txtDate");
+                //jun kai uncomment this
+                //String txtUrl = data.getStringExtra("txtUrl");
+
+
 //                textView.setText(str1);
 //                textView2.setText(str2);
                 if(txtTitle.length() == 0 && txtDescription.length() == 0){
@@ -157,6 +161,8 @@ public class BulletinFragment extends Fragment {
                 }
                 else{
                     bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription,txtDate));
+                    //jun kai comment top and uncomment bottom after
+                    //bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription,txtDate,txtUrl));
                     adapter.setPosts(bulletinBoardPosts);
                 }
 

@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sutd_social.firebase.BulletinBoard;
+
 import java.util.ArrayList;
 
 public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<BulletinBoardPostRecViewAdapter.ViewHolder>{ // this means that datatype of Adapter is the viewHolder Class
@@ -48,7 +50,7 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
         holder.postTitle.setText(posts.get(position).getPostTitle());
         holder.postDescription.setText(posts.get(position).getPostDescription());
         //adding image
-
+        BulletinBoard.displayImage((Activity) context, posts.get(position).getBulletin_url(),holder.cardImage);
 
         holder.BulletinBoardParent.setOnClickListener(new View.OnClickListener() {
             @Override

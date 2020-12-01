@@ -1,5 +1,6 @@
 package com.example.sutd_social;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sutd_social.firebase.MatchingAlgo;
+import com.example.sutd_social.firebase.Social;
 
 import org.w3c.dom.Text;
 
@@ -53,6 +55,7 @@ public class FindHelpRecViewAdapter extends RecyclerView.Adapter<FindHelpRecView
 //        }
         //holder.MatchRate.setText(find_help_posts.get(position).getConfidence_lvl().toString());
         holder.Skills.setText(find_help_posts.get(position).getSkills());
+        Social.displayImage((Activity)context, find_help_posts.get(position).getProfilePicture(),holder.ProfilePicture);
 
 
     }

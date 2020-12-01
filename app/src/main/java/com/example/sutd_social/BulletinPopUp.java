@@ -45,6 +45,10 @@ public class BulletinPopUp extends Activity {
                 String txtDate = edtTxteventdate.getText().toString();
                 //adding to firebase
                 BulletinBoard.addBulletin(Admin.getUserid(), new Bulletin(txtTitle,txtDescription));
+                //Jun kai do your image stuff here
+
+                //------------
+                // rmb to do intent put extra for url like below here pls give "txtUrl" as name
 
                 intent.putExtra("txtTitle", txtTitle);
                 intent.putExtra("txtDescription", txtDescription);

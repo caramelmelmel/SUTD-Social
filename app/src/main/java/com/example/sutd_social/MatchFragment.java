@@ -130,7 +130,7 @@ public class MatchFragment extends Fragment {
                                 for(String all_skill : Social.getSkills(id).keySet()){
                                     total_skills = total_skills + all_skill + "\n";
                                 }
-                                find_help_posts.add(new Find_Help(Social.getName(id), Social.getPillar(id),total_skills));
+                                find_help_posts.add(new Find_Help(Social.getName(id), Social.getPillar(id),Social.getDisplayPic(id),total_skills));
                             }
                         }
                     }
