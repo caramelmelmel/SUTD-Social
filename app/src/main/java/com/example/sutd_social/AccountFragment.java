@@ -168,7 +168,11 @@ public class AccountFragment extends Fragment {
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                skills.put(skillName, new Long(input.getText().toString()));
+                                String inText = input.getText().toString();
+                                int integer = Integer.parseInt(inText);
+                                if (integer > 0 && integer < 100) {
+                                    skills.put(skillName, new Long(input.getText().toString()));
+                                }
                             }
                         });
                         builder.show();
@@ -192,9 +196,8 @@ public class AccountFragment extends Fragment {
                 Chip newChip = (Chip) inflater.inflate(R.layout.skill_chip, null);
                 newChip.setText(inputSkills.getText().toString());
                 skillGroup.addView(newChip);
-                inputSkills.setText("");
-
                 skills.put(inputSkills.getText().toString(), new Long(50));
+                inputSkills.setText("");
 
                 newChip.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -210,7 +213,11 @@ public class AccountFragment extends Fragment {
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                skills.put(skillName, new Long(input.getText().toString()));
+                                String inText = input.getText().toString();
+                                int integer = Integer.parseInt(inText);
+                                if (integer > 0 && integer < 100) {
+                                    skills.put(skillName, new Long(input.getText().toString()));
+                                }
                             }
                         });
                         builder.show();
