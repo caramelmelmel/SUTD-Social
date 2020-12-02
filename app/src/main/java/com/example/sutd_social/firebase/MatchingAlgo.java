@@ -150,9 +150,9 @@ public class MatchingAlgo {
     //the input data is skill-> id -> confidence of that particular user
     public long getUserskillLevel(HashMap<String, HashMap<String, Long>> skillset, String skill, String id) {
         Log.i(TAG, "User skill is below");
-        Log.i(TAG,String.valueOf(skillset.get(skill).keySet()));
-        Log.i(TAG,skill);
-        Log.i(TAG,id);
+        Log.i(TAG, String.valueOf(skillset.get(skill).keySet()));
+        Log.i(TAG, skill);
+        Log.i(TAG, id);
         return skillset.get(skill).get(id);
     }
 
@@ -180,8 +180,12 @@ public class MatchingAlgo {
         Double max = Collections.max(percent.values());
 
         for (Map.Entry<String, Double> entry : percent.entrySet()) {
-            Double p = ((entry.getValue() - min) / (max - min)) * 100;
-            percent.put(entry.getKey(), p);
+            if (max == min || entry.getValue() == min) {
+                percent.put(entry.getKey(), entry.getValue());
+            } else {
+                double p = ((entry.getValue() - min) / (max - min)) * 100;
+                percent.put(entry.getKey(), p);
+            }
         }
         Log.i(TAG, "percent");
         return percent;
@@ -218,9 +222,9 @@ public class MatchingAlgo {
 
     }
 
-    public ArrayList<Map.Entry<String, Double>> skillsIsAllSmallCaps(String id, String skill){
+    public ArrayList<Map.Entry<String, Double>> skillsIsAllSmallCaps(String id, String skill) {
         String new_stuff = skill.toLowerCase();
-        ArrayList<Map.Entry<String, Double>> ls= getTheStats(id,new_stuff);
+        ArrayList<Map.Entry<String, Double>> ls = getTheStats(id, new_stuff);
         return ls;
     }
 

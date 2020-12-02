@@ -37,7 +37,7 @@ public class Bulletin_inner_post_popup extends Activity {
         textView_inner_title.setText(inner_title);
         textView_inner_description.setText(inner_description);
 
-        BulletinBoard.displayImage(this, inner_picture,inner_imageView);
+        BulletinBoard.displayImage(this, inner_picture, inner_imageView);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getRealMetrics(dm);
@@ -55,7 +55,7 @@ public class Bulletin_inner_post_popup extends Activity {
             }
         });
 
-        getWindow().setLayout((int)(width *0.83), (int)(height*0.85));
+        getWindow().setLayout((int) (width * 0.83), (int) (height * 0.85));
 
         getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.clear));
 

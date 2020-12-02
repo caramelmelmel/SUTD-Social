@@ -17,8 +17,8 @@ public class Bulletin {
     public String url;
     public String expiryDate;
 
-    Bulletin(){}
-
+    Bulletin() {
+    }
 
 
     Bulletin(String title, String description, String fifthRow, String image, String url, String expiryDate) {
@@ -34,7 +34,8 @@ public class Bulletin {
         // retrieve the Class should be the only other function
         // together with storing all in an HashMap of <id>, <bulletin>
     }
-// Added new constructor for 2 way population
+
+    // Added new constructor for 2 way population
     public Bulletin(String title, String description) {
         this.title = title;
         this.description = description;
@@ -68,7 +69,7 @@ public class Bulletin {
         try {
             return dateFormat.parse(date);
         } catch (ParseException e) {
-            Log.e(TAG, "dateParse: An error has occurred while parsing the date" );
+            Log.e(TAG, "dateParse: An error has occurred while parsing the date");
             e.printStackTrace();
             return null;
         }

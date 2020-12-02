@@ -61,58 +61,56 @@ public class SignUpActivity extends AppCompatActivity {
 
         });
     }
-    private void Register(){
+
+    private void Register() {
         String email = emailET.getText().toString();
         String password1 = password.getText().toString();
         String password2 = cfm_pw.getText().toString();
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             //refers to the edittext
             emailET.setError("Enter your email");
-        }
-        else if(TextUtils.isEmpty(password1)){
+        } else if (TextUtils.isEmpty(password1)) {
             password.setError("Enter your password");
-        }
-
-        else if(TextUtils.isEmpty(password2)){
+        } else if (TextUtils.isEmpty(password2)) {
             cfm_pw.setError("Confirm your password");
         }
 
         //check if the user has entered the same password
-        else if(password1!=password2){
+        else if (password1 != password2) {
             cfm_pw.setError("Please enter the same password");
         }
 
         //check for the length of password
-        else if(password1.length()< 8){
+        else if (password1.length() < 8) {
             password.setError("Length should be more than 8");
         }
         //check if user enters email format correctly
-        else if(!isValidEmail(email)){
+        else if (!isValidEmail(email)) {
             //refer to edit text
             password.setError("Enter in email format");
         }
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
         progressDialog.setCanceledOnTouchOutside(false);
-        firebaseAuth.createUserWithEmailAndPassword(email, password1).addOnCompleteListener(this,new OnCompleteListener(){
+        firebaseAuth.createUserWithEmailAndPassword(email, password1).addOnCompleteListener(this, new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     String id = firebaseAuth.getCurrentUser().getUid();
-                    Social.addUser(id,"", "", "", "", "", new HashMap<String, Long>());
-                    Toast.makeText(SignUpActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
+                    Social.addUser(id, "", "", "", "", "", new HashMap<String, Long>());
+                    Toast.makeText(SignUpActivity.this, "Successfully Registered", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
-                }
-                else {
+                } else {
                     Toast.makeText(SignUpActivity.this, "Sign Up failed!", Toast.LENGTH_LONG).show();
                 }
                 progressDialog.dismiss();
             }
-        });}
+        });
+    }
 
-    private boolean isValidEmail(CharSequence target){
+    private boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
 
 

@@ -4,7 +4,7 @@ public class Find_Help {
     private String name;
     private String pillar;
     private String profilePicture;
-    private Double confidence_lvl;
+    private int confidence_lvl;
     private String skills;
 
     public Find_Help(String name, String pillar) {
@@ -12,10 +12,18 @@ public class Find_Help {
         this.pillar = pillar;
     }
 
-    public Find_Help(String name, String pillar, Double confidence_lvl, String skills) {
+    public Find_Help(String name, String pillar, int confidence_lvl, String skills) {
         this.name = name;
         this.pillar = pillar;
         this.confidence_lvl = confidence_lvl;
+        this.skills = skills;
+    }
+
+    public Find_Help(String name, String pillar, int confidence_lvl, String profilePicture, String skills) {
+        this.name = name;
+        this.pillar = pillar;
+        this.confidence_lvl = confidence_lvl;
+        this.profilePicture = profilePicture;
         this.skills = skills;
     }
 
@@ -25,15 +33,7 @@ public class Find_Help {
         this.skills = skills;
     }
 
-    public Double getConfidence_lvl() {
-        return confidence_lvl;
-    }
-
-    public void setConfidence_lvl(Double confidence_lvl) {
-        this.confidence_lvl = confidence_lvl;
-    }
-
-    public Find_Help(String name, String pillar, Double confidence_lvl) {
+    public Find_Help(String name, String pillar, int confidence_lvl) {
         this.name = name;
         this.pillar = pillar;
         this.confidence_lvl = confidence_lvl;
@@ -44,6 +44,14 @@ public class Find_Help {
         this.pillar = pillar;
         this.profilePicture = profilePicture;
         this.skills = skills;
+    }
+
+    public int getConfidence_lvl() {
+        return confidence_lvl;
+    }
+
+    public void setConfidence_lvl(int confidence_lvl) {
+        this.confidence_lvl = confidence_lvl;
     }
 
     public String getName() {

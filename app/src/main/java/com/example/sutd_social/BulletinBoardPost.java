@@ -1,7 +1,7 @@
 package com.example.sutd_social;
 
 public class BulletinBoardPost {
-    private String postTitle, postDescription,postdate;
+    private String postTitle, postDescription, postdate;
     private String bulletin_url;
 
     public BulletinBoardPost(String postTitle, String postDescription) {

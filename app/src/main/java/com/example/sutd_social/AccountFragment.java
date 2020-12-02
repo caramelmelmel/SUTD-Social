@@ -2,11 +2,10 @@ package com.example.sutd_social;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.media.Image;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
-import android.text.Layout;
-import android.util.Log;
+import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -16,22 +15,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import com.example.sutd_social.R;
+
 import com.example.sutd_social.firebase.Admin;
 import com.example.sutd_social.firebase.Social;
 import com.example.sutd_social.firebase.User;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.HashMap;
-import java.util.List;
 
 
 /**
@@ -49,7 +46,11 @@ public class AccountFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    //init views-------
+    private ImageView displayPic;
+    private Button saveButton;
+    private EditText username, bio, inputSkills, fifthRows, teleContact;
+    private ChipGroup skillGroup, pillarGroup;
     public AccountFragment() {
         // Required empty public constructor
     }
@@ -80,15 +81,11 @@ public class AccountFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-    //init views-------
-    private ImageView displayPic;
-    private Button saveButton;
-    private EditText username, bio, inputSkills, fifthRows, teleContact;
-    private ChipGroup skillGroup, pillarGroup;
+
     //---------
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,  @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_account, container, false);
@@ -102,9 +99,34 @@ public class AccountFragment extends Fragment {
         pillarGroup = view.findViewById(R.id.edit_pillar);
         skillGroup = view.findViewById(R.id.skills_display);
         saveButton = view.findViewById(R.id.save_profile);
+
+        // Show DisplayPic
+        String url = Social.getDisplayPic(Admin.getUserid());
+        Social.displayImage(getActivity(), url, view.findViewById(R.id.profile_picture));
+
+        // Get image from user
+        View profile_pic = view.findViewById(R.id.profile_picture);
+        profile_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(openGallery, 10);
+            }
+        });
+
         return view;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10) {
+            if (resultCode == getActivity().RESULT_OK) {
+                Uri imageUri = data.getData();
+                Social.addImage(Admin.getUserid(), imageUri);
+            }
+        }
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -148,7 +170,7 @@ public class AccountFragment extends Fragment {
 
         HashMap<String, Long> skills = user.skills;
         if (!skills.isEmpty()) {
-            for (String skill: skills.keySet()) {
+            for (String skill : skills.keySet()) {
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 Chip newChip = (Chip) inflater.inflate(R.layout.skill_chip, null);
                 newChip.setText(skill);
@@ -267,6 +289,8 @@ public class AccountFragment extends Fragment {
                 }
 
                 Social.setAttr("Skills", Admin.getUserid(), skills);
+
+                Toast.makeText(getActivity(), "Successful!", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -73,7 +73,6 @@
 package com.example.sutd_social.firebase;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
@@ -81,8 +80,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
-import com.example.sutd_social.LoginActivity;
-import com.example.sutd_social.MainActivity;
 import com.example.sutd_social.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -109,10 +106,6 @@ public class Social {
     private static final HashMap<String, HashMap> users = new HashMap<>();
     private static DatabaseReference socialRef; // Firebase
     private static StorageReference socialImgRef; // Storage
-
-    public static Social getInstance() {
-        return ourInstance;
-    }
 
     public Social() {
         // Query from Firebase and get the required information
@@ -149,6 +142,10 @@ public class Social {
             }
         });
 
+    }
+
+    public static Social getInstance() {
+        return ourInstance;
     }
 
     public static void setAttr(String detail, String id, String value) {

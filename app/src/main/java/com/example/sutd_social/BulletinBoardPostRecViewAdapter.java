@@ -17,19 +17,19 @@ import com.example.sutd_social.firebase.BulletinBoard;
 
 import java.util.ArrayList;
 
-public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<BulletinBoardPostRecViewAdapter.ViewHolder>{ // this means that datatype of Adapter is the viewHolder Class
-
-    private ArrayList<BulletinBoardPost> posts = new ArrayList<>(); // create new ArrayList to fit into Recycler View
+public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<BulletinBoardPostRecViewAdapter.ViewHolder> { // this means that datatype of Adapter is the viewHolder Class
 
     private final Context context;  // context have to be created in order for items to reference it
     private final int activity_code_inner = 2;
+    private ArrayList<BulletinBoardPost> posts = new ArrayList<>(); // create new ArrayList to fit into Recycler View
 
     public BulletinBoardPostRecViewAdapter(Context context) {  // create constructor for Adapter Class
         this.context = context;   // constructor for context
     }
 
     @NonNull
-    @Override                // ViewGroup is parent of all layout files and is used to group different views inside it
+    @Override
+    // ViewGroup is parent of all layout files and is used to group different views inside it
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {  // this generates the view holder
         View view = LayoutInflater.from(parent.getContext()) //this inflates the view and requires context from ViewGroup parent
                 .inflate(R.layout.bulletin_board_post, parent, false);  // in inflate need 3 arguements, 1st is address of layout of every item in recyclerView, 2nd is ViewGroup (Where you want to attach View object, if Main Activity layout is Relative, parent is also relative), 3rd is a boolean
@@ -50,7 +50,7 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
         holder.postTitle.setText(posts.get(position).getPostTitle());
         holder.postDescription.setText(posts.get(position).getPostDescription());
         //adding image
-        BulletinBoard.displayImage((Activity) context, posts.get(position).getBulletin_url(),holder.cardImage);
+        BulletinBoard.displayImage((Activity) context, posts.get(position).getBulletin_url(), holder.cardImage);
         String inside_url = posts.get(position).getBulletin_url();
 
 
@@ -60,12 +60,12 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
 
                 Activity origin = (Activity) context;
 
-                Intent inner_intent = new Intent(context,Bulletin_inner_post_popup.class);
-                inner_intent.putExtra("inner_title", posts.get(position).getPostTitle().toString());
-                inner_intent.putExtra("inner_description", posts.get(position).getPostDescription().toString());
+                Intent inner_intent = new Intent(context, Bulletin_inner_post_popup.class);
+                inner_intent.putExtra("inner_title", posts.get(position).getPostTitle());
+                inner_intent.putExtra("inner_description", posts.get(position).getPostDescription());
                 inner_intent.putExtra("inner_picture", inside_url);
                 //origin.startActivity(inner_intent);
-                origin.startActivityForResult(inner_intent,activity_code_inner);
+                origin.startActivityForResult(inner_intent, activity_code_inner);
 
             }
         });
@@ -83,14 +83,15 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
         notifyDataSetChanged();  // This is to notify Recycler View to refresh when ArrayList is changed from the internet
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{   // inner view holder class will hold view for every item in recycler view
+    public class ViewHolder extends RecyclerView.ViewHolder {   // inner view holder class will hold view for every item in recycler view
 
         private final TextView postTitle;
         private final TextView postDescription;  // initiallize all widgets that were inside the new layout file
         private final CardView BulletinBoardParent;
-        private ImageView cardImage;
-        private TextView title_inner;
-        private TextView description_inner;
+        private final ImageView cardImage;
+        private final TextView title_inner;
+        private final TextView description_inner;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //card_title, card_content

@@ -3,17 +3,16 @@ package com.example.sutd_social;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.sutd_social.firebase.Bulletin;
 import com.example.sutd_social.firebase.BulletinBoard;
@@ -33,11 +32,17 @@ public class BulletinFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    // for popup
+    private final int activity_code = 1;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    //-------initialize----------
+    private RecyclerView bulletinBoardRecView;
+    private FloatingActionButton addPost;
+    //private Button addPost;
+    private ArrayList<BulletinBoardPost> bulletinBoardPosts;
+    private BulletinBoardPostRecViewAdapter adapter;
     public BulletinFragment() {
         // Required empty public constructor
     }
@@ -59,15 +64,6 @@ public class BulletinFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
-    //-------initialize----------
-    private RecyclerView bulletinBoardRecView;
-    private FloatingActionButton addPost;
-    //private Button addPost;
-    private ArrayList<BulletinBoardPost> bulletinBoardPosts;
-    private BulletinBoardPostRecViewAdapter adapter;
-    // for popup
-    private final int activity_code = 1;
     //-----------
     //---------------------------
 
@@ -93,24 +89,21 @@ public class BulletinFragment extends Fragment {
         //firebase--------
         ArrayList<String> keySet = new ArrayList<>();
         HashMap<String, Bulletin> all_posts = BulletinBoard.getBulletin();
-        for (String key : all_posts.keySet()){
+        for (String key : all_posts.keySet()) {
             keySet.add(key);
         }
 
 
-        for (String key : keySet ){
+        for (String key : keySet) {
             String individual_post_title = BulletinBoard.getBulletin(key).title;
             String individual_post_description = BulletinBoard.getBulletin(key).description;
             String individual_post_expiryDate = BulletinBoard.getBulletin(key).expiryDate;
             String individual_post_image = BulletinBoard.getBulletin(key).image;
-            bulletinBoardPosts.add(new BulletinBoardPost(individual_post_title,individual_post_description,individual_post_expiryDate,individual_post_image));
+            bulletinBoardPosts.add(new BulletinBoardPost(individual_post_title, individual_post_description, individual_post_expiryDate, individual_post_image));
         }
 
 
-
-
         //--------
-
 
 
         adapter.setPosts(bulletinBoardPosts);
@@ -131,17 +124,18 @@ public class BulletinFragment extends Fragment {
             public void onClick(View view) {
                 //bulletinBoardPosts.add(new BulletinBoardPost("title", "yoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyo"));
 
-                startActivityForResult(new Intent(getContext(),BulletinPopUp.class),activity_code);
+                startActivityForResult(new Intent(getContext(), BulletinPopUp.class), activity_code);
 
                 //adapter.setPosts(bulletinBoardPosts);
             }
         });
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == activity_code){
-            if(resultCode == Activity.RESULT_OK){
+        if (requestCode == activity_code) {
+            if (resultCode == Activity.RESULT_OK) {
                 String txtTitle = data.getStringExtra("txtTitle");
                 String txtDescription = data.getStringExtra("txtDescription");
                 String txtDate = data.getStringExtra("txtDate");
@@ -150,19 +144,15 @@ public class BulletinFragment extends Fragment {
 
 //                textView.setText(str1);
 //                textView2.setText(str2);
-                if(txtTitle.length() == 0 && txtDescription.length() == 0){
-                    Toast.makeText(getContext(),"Please fill in the Title and Description", Toast.LENGTH_SHORT).show();
-                }
-
-                else if(txtTitle.length() == 0){
-                    Toast.makeText(getContext(),"Please fill in the Title", Toast.LENGTH_SHORT).show();
-                }
-                else if(txtDescription.length() == 0){
-                    Toast.makeText(getContext(),"Please fill in the Description", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                if (txtTitle.length() == 0 && txtDescription.length() == 0) {
+                    Toast.makeText(getContext(), "Please fill in the Title and Description", Toast.LENGTH_SHORT).show();
+                } else if (txtTitle.length() == 0) {
+                    Toast.makeText(getContext(), "Please fill in the Title", Toast.LENGTH_SHORT).show();
+                } else if (txtDescription.length() == 0) {
+                    Toast.makeText(getContext(), "Please fill in the Description", Toast.LENGTH_SHORT).show();
+                } else {
                     //bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription,txtDate));
-                    bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription,txtDate,""));  // TODO: txtURL is uri of local storage, not firebase link
+                    bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription, txtDate, ""));  // TODO: txtURL is uri of local storage, not firebase link
                     adapter.setPosts(bulletinBoardPosts);
                 }
             }

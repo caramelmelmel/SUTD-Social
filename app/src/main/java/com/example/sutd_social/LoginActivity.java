@@ -1,9 +1,5 @@
 package com.example.sutd_social;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sutd_social.firebase.Admin;
 import com.example.sutd_social.firebase.BulletinBoard;
@@ -39,10 +38,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        firebaseAuth=FirebaseAuth.getInstance();
-        emailET=findViewById(R.id.email);
-        password=findViewById(R.id.password);
-        signInButton=findViewById(R.id.login);
+        firebaseAuth = FirebaseAuth.getInstance();
+        emailET = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        signInButton = findViewById(R.id.login);
         progressDialog = new ProgressDialog(this);
         signUpTv = findViewById(R.id.signupTv);
 
@@ -53,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             Admin.init(firebaseAuth.getCurrentUser().getUid());
             Social.getInstance();
             BulletinBoard.getInstance();
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
 
             // Time for firebase to fetch data
@@ -81,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         signUpTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -89,18 +88,18 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-    private void Login(){
+
+    private void Login() {
         String email = emailET.getText().toString();
         String password1 = password.getText().toString();
 //         Hard code test cases
 //         String email = "testaccount@gmail.com";
 //         String password1 = "testing123";
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             //refers to the edittext
             emailET.setError("Enter your email");
             return;
-        }
-        else if(TextUtils.isEmpty(password1)){
+        } else if (TextUtils.isEmpty(password1)) {
             password.setError("Enter your password");
             return;
         }
@@ -110,26 +109,26 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
 
         Log.d(TAG, "Login current user");
-        firebaseAuth.signInWithEmailAndPassword(email, password1).addOnCompleteListener(this,new OnCompleteListener(){
+        firebaseAuth.signInWithEmailAndPassword(email, password1).addOnCompleteListener(this, new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(LoginActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class); //DashBoardActivity
+                if (task.isSuccessful()) {
+                    Toast.makeText(LoginActivity.this, "Successfully Registered", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class); //DashBoardActivity
                     startActivity(intent);
                     Admin.init(firebaseAuth.getCurrentUser().getUid());
                     Social.getInstance();
                     BulletinBoard.getInstance();
                     finish();
 
-                }
-                else {
+                } else {
                     Toast.makeText(LoginActivity.this, "Sign In failed!", Toast.LENGTH_LONG).show();
                 }
                 progressDialog.dismiss();
             }
-        });}
-
+        });
     }
+
+}
 
 

@@ -27,8 +27,12 @@ public class SearchSocial extends AppCompatActivity {
         ArrayList<String> userList = new ArrayList<>();
 
         // Get list of users:
-        userList.add("Melody"); userList.add("Kai Xun"); userList.add("Darren");
-        userList.add("Jun Kai");userList.add("Le Xuan"); userList.add("Ngai Man");
+        userList.add("Melody");
+        userList.add("Kai Xun");
+        userList.add("Darren");
+        userList.add("Jun Kai");
+        userList.add("Le Xuan");
+        userList.add("Ngai Man");
 
         // TODO: Can implement custom list item layout to look nicer
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userList);

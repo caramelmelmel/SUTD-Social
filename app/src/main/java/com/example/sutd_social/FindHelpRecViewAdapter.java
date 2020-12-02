@@ -2,6 +2,7 @@ package com.example.sutd_social;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,25 +13,22 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sutd_social.firebase.MatchingAlgo;
 import com.example.sutd_social.firebase.Social;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class FindHelpRecViewAdapter extends RecyclerView.Adapter<FindHelpRecViewAdapter.ViewHolder> {
 
-    private ArrayList<Find_Help> find_help_posts = new ArrayList<>(); // create new ArrayList to fit into Recycler View
-
     private final Context context;  // context have to be created in order for items to reference it
+    private ArrayList<Find_Help> find_help_posts = new ArrayList<>(); // create new ArrayList to fit into Recycler View
 
     public FindHelpRecViewAdapter(Context context) {  // create constructor for Adapter Class
         this.context = context;   // constructor for context
     }
 
     @NonNull
-    @Override                // ViewGroup is parent of all layout files and is used to group different views inside it
+    @Override
+    // ViewGroup is parent of all layout files and is used to group different views inside it
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {  // this generates the view holder
         View view = LayoutInflater.from(parent.getContext()) //this inflates the view and requires context from ViewGroup parent
                 .inflate(R.layout.find_help_posts, parent, false);  // in inflate need 3 arguements, 1st is address of layout of every item in recyclerView, 2nd is ViewGroup (Where you want to attach View object, if Main Activity layout is Relative, parent is also relative), 3rd is a boolean
@@ -55,8 +53,9 @@ public class FindHelpRecViewAdapter extends RecyclerView.Adapter<FindHelpRecView
 //        }
         //holder.MatchRate.setText(find_help_posts.get(position).getConfidence_lvl().toString());
         holder.Skills.setText(find_help_posts.get(position).getSkills());
-        Social.displayImage((Activity)context, find_help_posts.get(position).getProfilePicture(),holder.ProfilePicture);
-
+        Log.d("LoginActivity", "onBindViewHolder: " + find_help_posts.get(position).getConfidence_lvl());
+        holder.MatchRate.setText(find_help_posts.get(position).getConfidence_lvl() + " %");
+        Social.displayImage((Activity) context, find_help_posts.get(position).getProfilePicture(), holder.ProfilePicture);
 
     }
 
@@ -70,14 +69,15 @@ public class FindHelpRecViewAdapter extends RecyclerView.Adapter<FindHelpRecView
         notifyDataSetChanged();  // This is to notify Recycler View to refresh when ArrayList is changed from the internet
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{   // inner view holder class will hold view for every item in recycler view
+    public class ViewHolder extends RecyclerView.ViewHolder {   // inner view holder class will hold view for every item in recycler view
 
         private final CardView cardView;  // initiallize all widgets that were inside the new layout file
         private final TextView StudentName;
         private final TextView StudentPillar;
-        private TextView MatchRate;
-        private TextView Skills;
+        private final TextView MatchRate;
+        private final TextView Skills;
         private final ImageView ProfilePicture;
+
         //private RelativeLayout parent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

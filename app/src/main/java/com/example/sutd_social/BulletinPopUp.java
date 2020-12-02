@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,7 +20,6 @@ import androidx.annotation.Nullable;
 import com.example.sutd_social.firebase.Admin;
 import com.example.sutd_social.firebase.Bulletin;
 import com.example.sutd_social.firebase.BulletinBoard;
-import com.example.sutd_social.firebase.Social;
 
 public class BulletinPopUp extends Activity {
 

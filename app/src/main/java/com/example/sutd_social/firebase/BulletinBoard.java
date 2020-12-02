@@ -23,8 +23,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 
-import static java.lang.Thread.sleep;
-
 public class BulletinBoard {
     private static final BulletinBoard ourInstance = new BulletinBoard();
     private static final String TAG = "BulletinBoard";
@@ -130,7 +128,7 @@ public class BulletinBoard {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Log.d(TAG, "onSuccess: Image uploaded" );
+                Log.d(TAG, "onSuccess: Image uploaded");
                 // Success!
                 // Get file url to upload url onto firebase
                 imgRef.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
