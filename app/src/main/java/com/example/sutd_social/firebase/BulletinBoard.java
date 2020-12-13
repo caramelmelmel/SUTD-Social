@@ -21,12 +21,17 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class BulletinBoard {
     private static final BulletinBoard ourInstance = new BulletinBoard();
     private static final String TAG = "BulletinBoard";
     private static final HashMap<String, Bulletin> bulletinBoard = new HashMap<>();
+    private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // use this with format() or parse()
     private static DatabaseReference bulletinRef;
     private static StorageReference bulletinImgRef;
 
@@ -69,7 +74,7 @@ public class BulletinBoard {
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Log.e(TAG, "onChildMoved: " + snapshot.getKey() + snapshot.getValue(Bulletin.class).toString());
-                Log.e(TAG, "onChildMoved: You should not be triggering this function!!");
+                Log.e(TAG, "onChildMoved: You should not be triggering this method!!");
             }
 
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -83,29 +88,32 @@ public class BulletinBoard {
         return ourInstance;
     }
 
+    // Get the whole HashMap of Bulletins
     public static HashMap<String, Bulletin> getBulletin() {
         return bulletinBoard;
     }
 
+    // Get the Bulletin with the specified id
     public static Bulletin getBulletin(String id) {
         return bulletinBoard.get(id);
     }
 
+    // Use this to add new Bulletin or update Bulletin
     public static void addBulletin(String id, Bulletin bulletin) {
-        // More like updateBulletin
         bulletinRef.child(id).setValue(bulletin);
         bulletinBoard.put(id, bulletin);  // TODO: unsafe operation. Add failure listener
     }
 
+    // Alternatively:
     public static void addBulletin(String id, String title, String description, String fifthRow, String image, String url, String expiryDate) {
-        // If the user never specify any field, the default is ""
+        // If the user never specify any field, the default is "" (same goes for image)
         Bulletin newBulletin = new Bulletin(title, description, fifthRow, image, url, expiryDate);
 
         addBulletin(id, newBulletin);
     }
 
     public static void addBulletin(String id, String title, String description, String fifthRow, Uri image, String url, String expiryDate) {
-        // Similar function as above, except that image is provided
+        // Similar method as above, except that image is provided
         Bulletin bulletin = new Bulletin(title, description, fifthRow, "", url, expiryDate);
         addImage(id, bulletin, image);
     }
@@ -153,6 +161,22 @@ public class BulletinBoard {
 
     public static void displayImage(Activity context, String url, ImageView imageView) {
         Glide.with(context).load(url).placeholder(R.drawable.default_bulletin).into(imageView);
+    }
+
+    // Date is stored as String in Firebase for convenience
+    // Helper methods for Date-String conversion
+    public static String dateFormat(Date date) {
+        return dateFormat.format(date);
+    }
+
+    public static Date dateParse(String date) {
+        try {
+            return dateFormat.parse(date);
+        } catch (ParseException e) {
+            Log.e(TAG, "dateParse: An error has occurred while parsing the date");
+            e.printStackTrace();
+            return null;
+        }
     }
 }
 

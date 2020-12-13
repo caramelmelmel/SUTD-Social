@@ -9,22 +9,25 @@
 
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="214dp"
         android:layout_height="54dp"
+        android:layout_marginTop="30dp"
         android:text="Any events?"
         android:textColor="#ffffff"
         android:textFontWeight="@android:integer/config_longAnimTime"
         android:textSize="36dp"
         android:textStyle="italic|normal"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="21dp"
-        tools:layout_editor_absoluteY="39dp" />
+        app:layout_constraintEnd_toEndOf="@+id/edtTxt_Title"
+        app:layout_constraintStart_toStartOf="@+id/edtTxt_Title"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/edtTxt_Title"
         android:layout_width="214dp"
         android:layout_height="40dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="20dp"
         android:background="@null"
         android:ems="10"
         android:hint="Add title activity title here"
@@ -33,12 +36,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.239"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/edtTxt_description"
-        android:layout_width="221dp"
-        android:layout_height="203dp"
+        android:layout_width="311dp"
+        android:layout_height="76dp"
         android:layout_centerInParent="true"
         android:layout_marginTop="64dp"
         android:background="@null"
@@ -50,7 +53,7 @@
         android:textColorHint="@color/white"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.247"
+        app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtTxt_Title" />
 
@@ -73,6 +76,22 @@
         app:layout_constraintTop_toBottomOf="@+id/edtTxt_Title"
         app:layout_constraintVertical_bias="0.161" />
 
+    <TextView
+        android:id="@+id/image_prompt"
+        android:layout_width="214dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="12dp"
+        android:text="Add image:"
+        android:textColor="#ffffff"
+        android:textFontWeight="@android:integer/config_longAnimTime"
+        android:textSize="20dp"
+        android:textStyle="italic|normal"
+        app:layout_constraintEnd_toEndOf="@+id/edtTxt_description"
+        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintStart_toStartOf="@+id/edtTxt_description"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxt_description"
+        tools:ignore="MissingConstraints" />
+
     <Button
         android:id="@+id/btn_Cancel"
         android:layout_width="120dp"
@@ -82,6 +101,7 @@
         android:background="@drawable/button_border"
         android:text="Cancel"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_Confirm"
@@ -96,6 +116,7 @@
         android:layout_marginBottom="32dp"
         android:background="@drawable/button_border"
         android:drawableBottom="@color/white"
+        android:textColor="@color/white"
         android:text="Confirm"
         android:textAllCaps="false"
         android:textSize="24dp"
@@ -105,12 +126,15 @@
     <ImageView
         android:id="@+id/bulletin_popup_imageview"
         android:layout_width="113dp"
-        android:layout_height="179dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="30dp"
         android:src="@drawable/ic_action_account"
+        android:text="Add Image"
         app:layout_constraintBottom_toTopOf="@+id/btn_Confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxt_description" />
+        app:layout_constraintTop_toBottomOf="@+id/image_prompt"
+        app:layout_constraintVertical_bias="0.25" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

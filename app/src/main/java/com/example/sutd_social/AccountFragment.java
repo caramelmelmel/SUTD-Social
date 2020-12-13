@@ -140,6 +140,7 @@ public class AccountFragment extends Fragment {
         teleContact.setText(user.telegram);
 
         String pillar = user.pillar;
+        if(pillar != null){
         switch (pillar) {
             case "Freshmore": {
                 Chip pillarChip = view.findViewById(R.id.freshmore_chip);
@@ -166,9 +167,12 @@ public class AccountFragment extends Fragment {
                 pillarChip.setChecked(true);
                 break;
             }
-        }
+        }}
 
         HashMap<String, Long> skills = user.skills;
+        if(user.skills==null){
+            return;
+        }
         if (!skills.isEmpty()) {
             for (String skill : skills.keySet()) {
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -191,9 +195,14 @@ public class AccountFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String inText = input.getText().toString();
-                                int integer = Integer.parseInt(inText);
-                                if (integer > 0 && integer < 100) {
-                                    skills.put(skillName, new Long(input.getText().toString()));
+                                if (inText == "") {
+                                    // Do nothing
+                                    return;
+                                } else {
+                                    int integer = Integer.parseInt(inText);
+                                    if (integer > 0 && integer < 100) {
+                                        skills.put(skillName, new Long(input.getText().toString()));
+                                    }
                                 }
                             }
                         });

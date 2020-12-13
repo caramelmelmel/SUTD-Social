@@ -107,7 +107,11 @@ public class Social {
     private static DatabaseReference socialRef; // Firebase
     private static StorageReference socialImgRef; // Storage
 
-    public Social() {
+    public static Social getInstance() {
+        return ourInstance;
+    }
+
+    private Social() {
         // Query from Firebase and get the required information
         Log.d(TAG, "Initialising Social");
 
@@ -144,8 +148,6 @@ public class Social {
 
     }
 
-    public static Social getInstance() {
-        return ourInstance;
     }
 
     public static void setAttr(String detail, String id, String value) {
@@ -186,6 +188,8 @@ public class Social {
         // https://firebase.google.com/docs/storage/android/upload-files
         // Point to the person's image in jpg format
         String fileId = id + ".jpg";
+
+        // Get Google Storage reference
         final StorageReference userdpRef = socialImgRef.child(fileId);
         Log.d(TAG, "Writing data: " + fileId);
 
@@ -194,7 +198,7 @@ public class Social {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                // Unsuccessful uploads
+                // TODO: Unsuccessful uploads
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -299,6 +303,9 @@ public class Social {
     }
 
     public static void displayImage(Activity context, String url, ImageView imageView) {
+        // Get Activity via this or getActivity()
+        // Get URL using getDisplayPic()
+        // Get ImageView via findViewById()
         Glide.with(context).load(url).placeholder(R.drawable.default_user).into(imageView);
     }
 
