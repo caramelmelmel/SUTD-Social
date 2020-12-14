@@ -40,13 +40,6 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
 
     @Override   // on Click Listener is set here   , final added as position used in inner class
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {   //position is position of item inside recyclerView
-        //holder.txtName.setText(contacts.get(position).getName());
-//        holder.BulletinBoardParent.setOnClickListener(new View.OnClickListener() {   // can just set onClick for whole parent Layout rather than individual widgets
-//            @Override
-//            public void onClick(View view) {
-//                //Toast.makeText(context, contacts.get(position).getName() + " Selected",Toast.LENGTH_SHORT).show();
-//            }
-//        });
         holder.postTitle.setText(posts.get(position).getPostTitle());
         holder.postDescription.setText(posts.get(position).getPostDescription());
         //adding image
@@ -64,7 +57,7 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
                 inner_intent.putExtra("inner_title", posts.get(position).getPostTitle());
                 inner_intent.putExtra("inner_description", posts.get(position).getPostDescription());
                 inner_intent.putExtra("inner_picture", inside_url);
-                //origin.startActivity(inner_intent);
+
                 origin.startActivityForResult(inner_intent, activity_code_inner);
 
             }
@@ -94,7 +87,6 @@ public class BulletinBoardPostRecViewAdapter extends RecyclerView.Adapter<Bullet
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            //card_title, card_content
             postTitle = itemView.findViewById(R.id.card_title);  // Have to initialize findViewByID through the view object in this class
             postDescription = itemView.findViewById(R.id.card_content);
             BulletinBoardParent = itemView.findViewById(R.id.bulletin_board_post_layout);  // Have to instantiate to access from OnBindViewHolder Method

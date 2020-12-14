@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import static android.widget.Toast.LENGTH_LONG;
 import static java.lang.Thread.sleep;
 
 public class LoginActivity extends AppCompatActivity {
@@ -63,12 +64,9 @@ public class LoginActivity extends AppCompatActivity {
             }
             finish();
         } else {
-            // user is not logged in
-            // TODO: do nothing I guess?
+            Toast.makeText(LoginActivity.this,"You are not logged in",LENGTH_LONG);
         }
-        // can delete this after
-        //startActivity(new Intent(getApplicationContext(),MainActivity.class));
-        //-----------------------
+
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,9 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     private void Login() {
         String email = emailET.getText().toString();
         String password1 = password.getText().toString();
-//         Hard code test cases
-//         String email = "testaccount@gmail.com";
-//         String password1 = "testing123";
+
         if (TextUtils.isEmpty(email)) {
             //refers to the edittext
             emailET.setError("Enter your email");
@@ -113,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "Successfully Registered", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Successfully Registered", LENGTH_LONG).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class); //DashBoardActivity
                     startActivity(intent);
                     Admin.init(firebaseAuth.getCurrentUser().getUid());
@@ -122,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
 
                 } else {
-                    Toast.makeText(LoginActivity.this, "Sign In failed!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Sign In failed!", LENGTH_LONG).show();
                 }
                 progressDialog.dismiss();
             }

@@ -1,4 +1,3 @@
-// Source: https://firebasetutorials.com/firebase-database/#How_to_read_an_object_from_the_Firebase_Realtime_Database
 
 /*
  * Data structure for Social.users: -Nested HashMap
@@ -148,7 +147,6 @@ public class Social {
 
     }
 
-    }
 
     public static void setAttr(String detail, String id, String value) {
         // Overloaded method for Name, Info, Pillar (string)
@@ -156,9 +154,6 @@ public class Social {
         if (strHeader.contains(detail)) {
             socialRef.child(detail).child(id).setValue(value);
 
-            // This sync the local copy first
-            // Might be risky if the write is not successful
-            // TODO: add on failure listener so that it will revert if it fails
             users.get(detail).put(id, value);
 
         } else {
@@ -198,13 +193,11 @@ public class Social {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                // TODO: Unsuccessful uploads
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // Success!
-                // Get file url to upload url onto firebase
+
                 userdpRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
@@ -220,8 +213,6 @@ public class Social {
 
     public static String addUser(String id, String name, String info, String pillar, String fifthRow, String telegram, HashMap<String, Long> skills) {
         // Get uuid
-        // String id = socialRef.child("Name").push().getKey();
-
         // Add attribute
         setAttr("Name", id, name);
         setAttr("Info", id, info);
@@ -303,9 +294,6 @@ public class Social {
     }
 
     public static void displayImage(Activity context, String url, ImageView imageView) {
-        // Get Activity via this or getActivity()
-        // Get URL using getDisplayPic()
-        // Get ImageView via findViewById()
         Glide.with(context).load(url).placeholder(R.drawable.default_user).into(imageView);
     }
 
@@ -336,35 +324,4 @@ public class Social {
         return users;
     }
 }
-/*
 
-Testing code:
-
-    public void testing(View v) {
-        HashMap<String, Long> skills = new HashMap<>();
-        skills.put("python", (long) 100);
-        skills.put("dance", (long) 50);
-        String id = Social.addUser("tommy", "Hi there", "ISTD", "Badminton", "@txtme", skills);
-
-        User user = Social.getUser(id);
-
-        Log.d(TAG, user.name + user.info + user.pillar + user.fifthRow + user.telegram);
-        Log.d(TAG, user.skills.toString());
-
-        Social.rmUser(id);
-    }
-
-    public void testing(View v) {
-        Log.d(TAG, "testing: find view by id");
-
-        ImageView a = findViewById(R.id.testimage);
-
-        Log.d(TAG, "testing: " + Social.getDisplayPic());
-
-        String url = Social.getDisplayPic("003");
-
-        Log.d(TAG, "testing: " + url);
-        Social.displayImage(this, url, a);
-    }
-
-*/

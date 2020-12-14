@@ -22,7 +22,6 @@ public class SearchSocial extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_social);
 
-        // https://www.youtube.com/watch?v=pM1fAmUQn8g
         ListView listView = findViewById(R.id.search_view);
         ArrayList<String> userList = new ArrayList<>();
 

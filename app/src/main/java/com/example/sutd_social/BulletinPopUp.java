@@ -67,8 +67,6 @@ public class BulletinPopUp extends Activity {
                 Log.i("BulletinBoard", "onClick: " + imageUri.toString());
                 BulletinBoard.addImage(Admin.getUserid(), bulletin, imageUri);
 
-                //------------
-                // rmb to do intent put extra for url like below here pls give "txtUrl" as name
 
                 intent.putExtra("txtTitle", txtTitle);
                 intent.putExtra("txtDescription", txtDescription);
@@ -116,7 +114,6 @@ public class BulletinPopUp extends Activity {
 
     //prompt the user by checking if the inputs are justified correctly
     private void confirmCheck() {
-        //set the instance attributes for this
         String Txttitle = edtTxtTitle.getText().toString();
         if (Txttitle.isEmpty()) {
             Toast.makeText(BulletinPopUp.this, "Please enter the event title!", Toast.LENGTH_LONG).show();

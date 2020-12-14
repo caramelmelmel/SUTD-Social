@@ -32,9 +32,7 @@ public class BulletinFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    // for popup
     private final int activity_code = 1;
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     //-------initialize----------
@@ -55,7 +53,6 @@ public class BulletinFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment BulletinFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static BulletinFragment newInstance(String param1, String param2) {
         BulletinFragment fragment = new BulletinFragment();
         Bundle args = new Bundle();
@@ -64,8 +61,6 @@ public class BulletinFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    //-----------
-    //---------------------------
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,7 +81,6 @@ public class BulletinFragment extends Fragment {
         bulletinBoardPosts = new ArrayList<>();
 
         adapter = new BulletinBoardPostRecViewAdapter(getContext());
-        //firebase--------
         ArrayList<String> keySet = new ArrayList<>();
         HashMap<String, Bulletin> all_posts = BulletinBoard.getBulletin();
         for (String key : all_posts.keySet()) {
@@ -102,8 +96,6 @@ public class BulletinFragment extends Fragment {
             bulletinBoardPosts.add(new BulletinBoardPost(individual_post_title, individual_post_description, individual_post_expiryDate, individual_post_image));
         }
 
-
-        //--------
 
 
         adapter.setPosts(bulletinBoardPosts);
@@ -122,11 +114,8 @@ public class BulletinFragment extends Fragment {
         addPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //bulletinBoardPosts.add(new BulletinBoardPost("title", "yoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyoyo"));
-
                 startActivityForResult(new Intent(getContext(), BulletinPopUp.class), activity_code);
 
-                //adapter.setPosts(bulletinBoardPosts);
             }
         });
     }
@@ -142,8 +131,6 @@ public class BulletinFragment extends Fragment {
                 String txtUrl = data.getStringExtra("txtUrl");
 
 
-//                textView.setText(str1);
-//                textView2.setText(str2);
                 if (txtTitle.length() == 0 && txtDescription.length() == 0) {
                     Toast.makeText(getContext(), "Please fill in the Title and Description", Toast.LENGTH_SHORT).show();
                 } else if (txtTitle.length() == 0) {
@@ -151,8 +138,8 @@ public class BulletinFragment extends Fragment {
                 } else if (txtDescription.length() == 0) {
                     Toast.makeText(getContext(), "Please fill in the Description", Toast.LENGTH_SHORT).show();
                 } else {
-                    //bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription,txtDate));
-                    bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription, txtDate, ""));  // TODO: txtURL is uri of local storage, not firebase link
+
+                    bulletinBoardPosts.add(new BulletinBoardPost(txtTitle, txtDescription, txtDate, ""));
                     adapter.setPosts(bulletinBoardPosts);
                 }
             }

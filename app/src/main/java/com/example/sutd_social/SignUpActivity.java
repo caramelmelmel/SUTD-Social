@@ -67,7 +67,6 @@ public class SignUpActivity extends AppCompatActivity {
         String password1 = password.getText().toString();
         String password2 = cfm_pw.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            //refers to the edittext
             emailET.setError("Enter your email");
         } else if (TextUtils.isEmpty(password1)) {
             password.setError("Enter your password");
@@ -80,9 +79,9 @@ public class SignUpActivity extends AppCompatActivity {
             cfm_pw.setError("Please enter the same password");
         }
 
-        //check for the length of password
+        //check for the length of password to be at least 8
         else if (password1.length() < 8) {
-            password.setError("Length should be more than 8");
+            password.setError("Length should be at least 8");
         }
         //check if user enters email format correctly
         else if (!isValidEmail(email)) {

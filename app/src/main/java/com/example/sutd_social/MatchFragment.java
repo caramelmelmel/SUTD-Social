@@ -29,12 +29,10 @@ import java.util.Map;
  */
 public class MatchFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     //--initialize for find help page
@@ -56,7 +54,7 @@ public class MatchFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment MatchFragment.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static MatchFragment newInstance(String param1, String param2) {
         MatchFragment fragment = new MatchFragment();
         Bundle args = new Bundle();
@@ -74,7 +72,6 @@ public class MatchFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-    //--
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -113,11 +110,8 @@ public class MatchFragment extends Fragment {
                 } else {
                     find_help_posts.clear();
                     String search_txt = searchBar.getText().toString().toLowerCase(); //lower case to account for all typing
-                    //Matching Algo
-                    //MatchingAlgo.getSkillset(Admin.getUserid(), search_txt)
                     MatchingAlgo matchingAlgo = new MatchingAlgo();
                     ArrayList<Map.Entry<String, Double>> algo_arr = matchingAlgo.skillsIsAllSmallCaps(Admin.getUserid(), search_txt);
-                    Log.d("LoginActivity", "onClick: " + algo_arr);
                     for (Map.Entry<String, Double> algo_entry : algo_arr) {
                         String current_id = algo_entry.getKey();
                         int confidence_lvl = (int) Math.round(algo_entry.getValue());
@@ -133,21 +127,6 @@ public class MatchFragment extends Fragment {
                     }
                 }
 
-
-                //Populating
-               /*for (String id : Social.getName().keySet()){
-                    if(Social.getSkills(id) != null) {
-                        for (String skill : Social.getSkills(id).keySet()) {
-                            if (skill.toLowerCase().equals(search_txt) ) {
-                                String total_skills = "";
-                                for(String all_skill : Social.getSkills(id).keySet()){
-                                    total_skills = total_skills + all_skill + "\n";
-                                }
-                                find_help_posts.add(new Find_Help(Social.getName(id), Social.getPillar(id),Social.getDisplayPic(id),total_skills));
-                            }
-                        }
-                    }
-                }*/
                 adapter.setPosts(find_help_posts);
                 find_help_RecView.setAdapter(adapter);
             }
