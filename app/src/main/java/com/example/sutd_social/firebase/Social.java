@@ -98,13 +98,13 @@ import java.util.HashSet;
 import java.util.Map;
 
 public class Social {
-    private static final Social ourInstance = new Social();
     private static final String TAG = "SocialSingleton";
     private static final HashSet<String> strHeader = new HashSet<>(Arrays.asList("Name", "Info", "Pillar", "FifthRow", "Telegram", "DisplayPic"));
     private static final HashSet<String> nestedHeader = new HashSet<>(Arrays.asList("Skills"));
     private static final HashMap<String, HashMap> users = new HashMap<>();
     private static DatabaseReference socialRef; // Firebase
     private static StorageReference socialImgRef; // Storage
+    private static final Social ourInstance = new Social();
 
     public static Social getInstance() {
         return ourInstance;
@@ -113,6 +113,12 @@ public class Social {
     private Social() {
         // Query from Firebase and get the required information
         Log.d(TAG, "Initialising Social");
+
+        // Initialise users
+        for (String i: strHeader) {
+            users.put(i, new HashMap<String, String>());
+        }
+        users.put("Skills", new HashMap<String, HashMap<String, Long>>());
 
         // Set up Storage Instance
         socialImgRef = FirebaseStorage.getInstance().getReference();
@@ -137,6 +143,7 @@ public class Social {
                     users.put(detail, (HashMap<String, String>) dataSnapshot.child(detail).getValue());
                 }
                 users.put("Skills", (HashMap<String, HashMap<String, Long>>) dataSnapshot.child("Skills").getValue());
+
             }
 
             @Override
@@ -270,27 +277,45 @@ public class Social {
     }
 
     public static String getName(String id) {
-        return (String) users.get("Name").get(id);
+        if (users.get("Name").containsKey(id)) {
+            return (String) users.get("Name").get(id);
+        }
+        return null;
     }
 
     public static String getInfo(String id) {
-        return (String) users.get("Info").get(id);
+        if (users.get("Info").containsKey(id)) {
+            return (String) users.get("Info").get(id);
+        }
+        return null;
     }
 
     public static String getPillar(String id) {
-        return (String) users.get("Pillar").get(id);
+        if (users.get("Pillar").containsKey(id)) {
+            return (String) users.get("Pillar").get(id);
+        }
+        return null;
     }
 
     public static String getFifthRow(String id) {
-        return (String) users.get("FifthRow").get(id);
+        if (users.get("FifthRow").containsKey(id)) {
+            return (String) users.get("FifthRow").get(id);
+        }
+        return null;
     }
 
     public static String getTelegram(String id) {
-        return (String) users.get("Telegram").get(id);
+        if (users.get("Telegram").containsKey(id)) {
+            return (String) users.get("Telegram").get(id);
+        }
+        return null;
     }
 
     public static String getDisplayPic(String id) {
-        return (String) users.get("DisplayPic").get(id);
+        if (users.get("DisplayPic").containsKey(id)) {
+            return (String) users.get("DisplayPic").get(id);
+        }
+        return null;
     }
 
     public static void displayImage(Activity context, String url, ImageView imageView) {
@@ -298,7 +323,10 @@ public class Social {
     }
 
     public static HashMap<String, Long> getSkills(String id) {
-        return (HashMap<String, Long>) users.get("Skills").get(id);
+        if (users.get("Skills").containsKey(id)) {
+            return (HashMap<String, Long>) users.get("Skills").get(id);
+        }
+        return null;
     }
 
     public static User getUser(String id) {

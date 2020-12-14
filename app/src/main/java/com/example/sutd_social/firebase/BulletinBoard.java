@@ -28,12 +28,12 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class BulletinBoard {
-    private static final BulletinBoard ourInstance = new BulletinBoard();
     private static final String TAG = "BulletinBoard";
     private static final HashMap<String, Bulletin> bulletinBoard = new HashMap<>();
     private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // use this with format() or parse()
     private static DatabaseReference bulletinRef;
     private static StorageReference bulletinImgRef;
+    private static final BulletinBoard ourInstance = new BulletinBoard();
 
     private BulletinBoard() {
         Log.d(TAG, "Initialising BulletinBoard");
@@ -95,7 +95,10 @@ public class BulletinBoard {
 
     // Get the Bulletin with the specified id
     public static Bulletin getBulletin(String id) {
-        return bulletinBoard.get(id);
+        if (bulletinBoard.containsKey(id)){
+            return bulletinBoard.get(id);
+        }
+        return null;
     }
 
     // Use this to add new Bulletin or update Bulletin
